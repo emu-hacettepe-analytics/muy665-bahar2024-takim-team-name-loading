@@ -1,5 +1,5 @@
 ---
-title: "Dusan Tadic"
+title: "Kubilay Berk Destur"
 ---
 
 ![](/assets/images/vesikalik.jpeg){fig-align="center"}

@@ -2,7 +2,7 @@
 title: "Kubilay Berk Destur"
 ---
 
-![](/assets/images/vesikalik.jpeg){fig-align="center"}
+![](images/KubilayBerkDestur.jpg){fig-align="center"}
 
 # Eğitim
 
@@ -13,9 +13,11 @@ title: "Kubilay Berk Destur"
 
 ## İşler
 
-1.  Firma xxx, pozisyon xx, yıl xxx
+1.  Firma ROKETSAN A.Ş., pozisyon UZMAN MÜHENDİS, yıl 2022 - halen
 
-2.  Firma yyy, pozisyon yyy, yıl yyy
+2.  Firma RENEISSANCE HEAVY UNDISTRIES, pozisyon TEKNİK OFİS MÜHENDİSİ, yıl 2020-2021
+
+3.  Firma KALYON HOLDİNG, pozisyon TEKNİK OFİS MÜHENDİSİ, yıl 2019-2020
 
 ## Stajlar
 

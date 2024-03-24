@@ -6,9 +6,9 @@ Takım Üyelerimizin detaylı özgemişlerinin yer aldığı kişisel sayfaları
 
 # Takım Üyeleri
 
-1.  [Edin_Džeko](/takim/edindzeko.qmd)
+1.  [Ali Barış Saraç](/takim/ali_baris_sarac.qmd)
 
-2.  [Dušan Tadić](/takim/dusantadic.qmd)
+2.  [Kubilay Berk Destur](/takim/kubilay_berk_destur.qmd)
 
 3.  [Frederico Rodrigues de Paula Santos](/takim/fred.qmd)
 

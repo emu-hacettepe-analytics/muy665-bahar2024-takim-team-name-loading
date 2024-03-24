@@ -2,7 +2,7 @@
 title: "Ali Baris Sarac"
 ---
 
-![](images/baris-1 (1).jpg){fig-align="center"}
+![](images/baris-1%20(1).jpg){fig-align="center" width="233"}
 
 # Eğitim
 

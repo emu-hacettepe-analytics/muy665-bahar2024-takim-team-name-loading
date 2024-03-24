@@ -6,8 +6,8 @@ title: "Kubilay Berk Destur"
 
 # Eğitim
 
--   Lisans, ................................., .................................... Üniversitesi, Türkiye, 20xx - 20xx.
--   Yüksek Lisans, Endüstri Mühendisliği, Hacettepe Üniversitesi, Türkiye, 20xx - devam ediyor.
+-   Lisans, İstanbul Teknik Üniversitesi, Türkiye, 2013 - 2019.
+-   Yüksek Lisans, Endüstri Mühendisliği, Hacettepe Üniversitesi, Türkiye, 2024 - devam ediyor.
 
 # İş Deneyimi
 

@@ -7,7 +7,7 @@ MUY660-İş Analitiği dersi takım sayfamıza hoş geldiniz.
 
 Bu analitik çalışmalarımızı paylaşıyoruz.
 
-Lütfen faaliyetlerimizi görmek için için bizi takipte kalın.
+Lütfen faaliyetlerimizi görmek için için bizi takipte kalın.\
 
 ## Takım Üyeleri
 
@@ -16,8 +16,6 @@ Lütfen faaliyetlerimizi görmek için için bizi takipte kalın.
 2.  [Kubilay Berk Destur](/takim/kubilay_berk_destur.qmd)
 
 3.  [Furkan Ferhat Şahinöz](/takim/furkan_ferhat_sahinoz.qmd)
-s
-
 
 ## Proje Adı
 

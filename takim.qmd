@@ -10,4 +10,4 @@ Takım Üyelerimizin detaylı özgemişlerinin yer aldığı kişisel sayfaları
 
 2.  [Kubilay Berk Destur](/takim/kubilay_berk_destur.qmd)
 
-3. [Furkan Ferhat Şahinöz ](/takim/furkan_ferhat_sahinoz.qmd)
+3.  [Furkan Ferhat Şahinöz](/takim/furkan_ferhat_sahinoz.qmd)

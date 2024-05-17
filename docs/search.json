@@ -222,7 +222,7 @@
     "href": "index.html#takım-üyeleri",
     "title": "Takım: Team Name Loading…",
     "section": "Takım Üyeleri",
-    "text": "Takım Üyeleri\n\nAli Baris Sarac\nKubilay Berk Destur\nFurkan Ferhat Şahinöz s"
+    "text": "Takım Üyeleri\n\nAli Baris Sarac\nKubilay Berk Destur\nFurkan Ferhat Şahinöz"
   },
   {
     "objectID": "portfolyo.html",
@@ -556,27 +556,76 @@
     "href": "takim/kubilay_berk_destur.html#işler",
     "title": "Kubilay Berk Destur",
     "section": "İşler",
-    "text": "İşler\n\nFirma ROKETSAN A.Ş., pozisyon UZMAN MÜHENDİS, yıl 2022 - halen\nFirma RENEISSANCE HEAVY UNDISTRIES, pozisyon TEKNİK OFİS MÜHENDİSİ, yıl 2020-2021\nFirma KALYON HOLDİNG, pozisyon TEKNİK OFİS MÜHENDİSİ, yıl 2019-2020"
+    "text": "İşler\n\nFirma ROKETSAN A.Ş., pozisyon UZMAN MÜHENDİS, yıl 2022 - halen\nFirma RENEISSANCE HEAVY UNDISTRIES, pozisyon TEKNİK OFİS MÜHENDİSİ, yıl 2020-2021\nFirma KALYON HOLDİNG, pozisyon TEKNİK OFİS MÜHENDİSİ, yıl 2019-2020",
+    "crumbs": [
+      "Takım Üyeleri",
+      "Kubilay Berk Destur"
+    ]
   },
   {
     "objectID": "takim/kubilay_berk_destur.html#stajlar",
     "href": "takim/kubilay_berk_destur.html#stajlar",
     "title": "Kubilay Berk Destur",
     "section": "Stajlar",
-    "text": "Stajlar\n\nFirma Kalyon Holding, pozisyon Teknik Ofis Mühendisi, yıl 2018\nFirma Gülsan Holding, pozisyon Saha Mühendisi, yıl 2017"
+    "text": "Stajlar\n\nFirma Kalyon Holding, pozisyon Teknik Ofis Mühendisi, yıl 2018\nFirma Gülsan Holding, pozisyon Saha Mühendisi, yıl 2017",
+    "crumbs": [
+      "Takım Üyeleri",
+      "Kubilay Berk Destur"
+    ]
   },
   {
     "objectID": "takim/ali_baris_sarac.html#işler",
     "href": "takim/ali_baris_sarac.html#işler",
     "title": "Ali Baris Sarac",
     "section": "İşler",
-    "text": "İşler\n\nSkymark, İmalat Mühendisi, yıl: 1\nRoketsan, Proje Mühendisi, yıl: 4"
+    "text": "İşler\n\nSkymark, İmalat Mühendisi, yıl: 1\nRoketsan, Proje Mühendisi, yıl: 4",
+    "crumbs": [
+      "Takım Üyeleri",
+      "Ali Baris Sarac"
+    ]
   },
   {
     "objectID": "takim/ali_baris_sarac.html#stajlar",
     "href": "takim/ali_baris_sarac.html#stajlar",
     "title": "Ali Baris Sarac",
     "section": "Stajlar",
-    "text": "Stajlar\n\nNurol Makine, İmalat Stajı, 1 ay\nMitaş Cıvata, Üretim Stajı, 1 ay"
+    "text": "Stajlar\n\nNurol Makine, İmalat Stajı, 1 ay\nMitaş Cıvata, Üretim Stajı, 1 ay",
+    "crumbs": [
+      "Takım Üyeleri",
+      "Ali Baris Sarac"
+    ]
+  },
+  {
+    "objectID": "takim/furkan_ferhat_sahinoz.html",
+    "href": "takim/furkan_ferhat_sahinoz.html",
+    "title": "Furkan Ferhat ŞAHİNÖZ",
+    "section": "",
+    "text": "![](takim/images/furkanferhatsahinoz.jpg}",
+    "crumbs": [
+      "Takım Üyeleri",
+      "Furkan Ferhat ŞAHİNÖZ"
+    ]
+  },
+  {
+    "objectID": "takim/furkan_ferhat_sahinoz.html#işler",
+    "href": "takim/furkan_ferhat_sahinoz.html#işler",
+    "title": "Furkan Ferhat ŞAHİNÖZ",
+    "section": "İşler",
+    "text": "İşler\n\nOrtana Elektronik Yazılım, Proje Mühendisi, 02.2022- (Halen Devam Ediyor)\nRa-Ya&Hasanoglu İş Ortaklığı, Şantiye Şefi, 02.2021-07.2021\nProyap İnşaat AŞ, Şantiye Şefi, 03.2021-01.2022",
+    "crumbs": [
+      "Takım Üyeleri",
+      "Furkan Ferhat ŞAHİNÖZ"
+    ]
+  },
+  {
+    "objectID": "takim/furkan_ferhat_sahinoz.html#stajlar",
+    "href": "takim/furkan_ferhat_sahinoz.html#stajlar",
+    "title": "Furkan Ferhat ŞAHİNÖZ",
+    "section": "Stajlar",
+    "text": "Stajlar\n\nAselsan AŞ, 1 ay",
+    "crumbs": [
+      "Takım Üyeleri",
+      "Furkan Ferhat ŞAHİNÖZ"
+    ]
   }
 ]

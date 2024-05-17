@@ -36,10 +36,10 @@ website:
       search: true
       contents:
         - takim.qmd
-        - takim/dusantadic.qmd
-        - takim/edindzeko.qmd
-        - takim/fred.qmd  
-        - takim/szymanski.qmd  
+        - takim/ali_baris_sarac.qmd
+        - takim/kubilay_berk_destur.qmd
+        - takim/furkan_ferhat_sahinoz.qmd  
+        
         
         
   page-navigation: true

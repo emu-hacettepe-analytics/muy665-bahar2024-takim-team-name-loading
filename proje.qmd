@@ -1,37 +1,75 @@
 ---
-title: "Proje X (proje adını yazınız)"
+title: "KALP HASTALIKLARI TAHMİNLEME"
 number-sections: true
 ---
 
-**Proje sayfamıza hoş geldiniz.**
+**Proje sayfamıza hoş geldiniz, keyifli seyirler dileriz.** 🫀
 
-*Projemizle ilgili güncellemelerden haberdar olmak için bu alanı takip edin.*
+![](images/13up-healthlife-superJumbo-v2.gif){width="616"}
 
-(Aşağıdaki başlıklar örnek olarak verilmiştir; lütfen gerektiği şekilde düzenlemekten çekinmeyin.)
-
-# Proje Genel Bakış ve Kapsamı
-
-xxxxxx
+# Kalp Hastalıkları Tahminleme Projejimizi Tanıyalım
 
 # Veri
 
-xxxxxx
+Resmi kurumlardan alınmış Cleveland (330 gözlem), Macaristan (294 gözlem), İsviçre (123 gözlem), Kaliforniya (200 gözlem), Dünya geneli (270 gözlem) birleştirilerek oluşturulmuş 918 benzersiz gözlem içerisinde 11 bağımsız değişken üzerinden kalp hastalığı olup olmadığını göstermektedir.
 
 ## Veri Kaynağı
 
-xxxxxx
+Kullandığımız veri setleri UCI Makine Öğrenimi Havuzundaki kalp hastalığı veri setleri dizini altında bulunabilir.
+
+Link: <https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/>
 
 ## Veri Hakkında Genel Bilgiler
 
-xxxxxx
+Bu veri setini halihazırda bağımsız olarak mevcut olan ancak daha önce birleştirilmemiş farklı veri setlerinin birleştirilmesiyle oluşturduk. Veri setimizde 5 kalp veri setini 11 ortak özellik üzerinden birleştirdik. Toplam gözlem sayımız tekrarlanan satırlar çıkarıldığında 918 gözlemdir.
+
+1.  **Yaş ve Cinsiyet**:
+
+    -   Verimizde yaş ve cinsiyet faktörleri yer almaktadır.
+
+2.  **Ağrı Tipi**:
+
+    -   ATA (Atipik Angina), NAP (Non-Anginal Pain), ASY (Asemptomatik), TA (Tipik Angina) gibi farklı göğüs ağrısı tipleri mevcuttur.
+
+3.  **Dinlenme Kan Basıncı**:
+
+    -   Hastaların herhangi bir egzersiz yapmadığı sıradakş kan basınçlarını mm/HG cinsinden göstermektedir.
+
+4.  **Kolesterol Seviyeleri**:
+
+    -   Hastaların kolestorel değerlerini göstermektedir.
+
+5.  **Açlık Kan Şekeri**:
+
+    -   Hastaların açlık kan şekeri değerlerini göztermektedir.
+
+6.  **Dinlenme EKG Sonuçları**:
+
+    -   Hastaların dinlenme EKG sonuçları normal, ST veya LVH olarak kategorize edilmiş.
+
+7.  **Maksimum Kalp Atış Hızı**:
+
+    -   Hastaların egzersiz sırasındakş maksimum kalp atış hızlarını göstermektedir.
+
+8.  **Egzersiz Anginası**:
+
+    -   Kalbi besleyen atardamarların darlık, tıkanma gibi sebeplerle kalbin oksijen ihtiyacını karşılayamadığı durumlarda kalp kökenli göğüs ağrısı veya sıkıntı hissi oluşur ve buna tıp dilinde veya latince angina pektoris adı verilir.
+
+9.  **Oldpeak**:
+
+    -   Dinlenmeye göre egzersizin neden olduğu ST depresyonu ('ST', EKG grafiğindeki konumlarla ilgilidir.
+
+10. **ST Eğimi**:
+
+    -   ST eğimi, Up (Yukarı), Flat (Düz) ve Down (Aşağı) olarak kategorize edilmiş.
+
+11. **Kalp Hastalığı**:
+
+    -   Kalp hastalığı olan hastalar 1, kalp hastalığı olmayan hastalar 0 ile kategorize edilmiştir.
 
 ## Tercih Sebebi
 
-xxxxxx
-
-## Ön İşleme
-
-xxxxxx
+Kalp hastalıklarının önceden belirli özelliklere bağlı olarak tahmin edilip edilemeyeceği üzerine çalışmak ve toplumdaki genel kanı olan, kalp hastalıklarının kalıtsal olduğu inancını irdelemek.
 
 # Analiz
 

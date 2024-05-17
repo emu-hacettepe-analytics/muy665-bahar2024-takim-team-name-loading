@@ -248,9 +248,9 @@
   {
     "objectID": "proje.html",
     "href": "proje.html",
-    "title": "Proje X (proje adını yazınız)",
+    "title": "KALP HASTALIKLARI TAHMİNLEME",
     "section": "",
-    "text": "Proje sayfamıza hoş geldiniz.\nProjemizle ilgili güncellemelerden haberdar olmak için bu alanı takip edin.\n(Aşağıdaki başlıklar örnek olarak verilmiştir; lütfen gerektiği şekilde düzenlemekten çekinmeyin.)"
+    "text": "Proje sayfamıza hoş geldiniz, keyifli seyirler dileriz. 🫀"
   },
   {
     "objectID": "proje.html#data-source",
@@ -333,23 +333,23 @@
   {
     "objectID": "proje.html#veri-kaynağı",
     "href": "proje.html#veri-kaynağı",
-    "title": "Proje X (proje adını yazınız)",
+    "title": "KALP HASTALIKLARI TAHMİNLEME",
     "section": "2.1 Veri Kaynağı",
-    "text": "2.1 Veri Kaynağı\nxxxxxx"
+    "text": "2.1 Veri Kaynağı\nKullandığımız veri setleri UCI Makine Öğrenimi Havuzundaki kalp hastalığı veri setleri dizini altında bulunabilir.\nLink: https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/"
   },
   {
     "objectID": "proje.html#veri-hakkında-genel-bilgiler",
     "href": "proje.html#veri-hakkında-genel-bilgiler",
-    "title": "Proje X (proje adını yazınız)",
+    "title": "KALP HASTALIKLARI TAHMİNLEME",
     "section": "2.2 Veri Hakkında Genel Bilgiler",
-    "text": "2.2 Veri Hakkında Genel Bilgiler\nxxxxxx"
+    "text": "2.2 Veri Hakkında Genel Bilgiler\nBu veri setini halihazırda bağımsız olarak mevcut olan ancak daha önce birleştirilmemiş farklı veri setlerinin birleştirilmesiyle oluşturduk. Veri setimizde 5 kalp veri setini 11 ortak özellik üzerinden birleştirdik. Toplam gözlem sayımız tekrarlanan satırlar çıkarıldığında 918 gözlemdir.\n\nYaş ve Cinsiyet:\n\nVerimizde yaş ve cinsiyet faktörleri yer almaktadır.\n\nAğrı Tipi:\n\nATA (Atipik Angina), NAP (Non-Anginal Pain), ASY (Asemptomatik), TA (Tipik Angina) gibi farklı göğüs ağrısı tipleri mevcuttur.\n\nDinlenme Kan Basıncı:\n\nHastaların herhangi bir egzersiz yapmadığı sıradakş kan basınçlarını mm/HG cinsinden göstermektedir.\n\nKolesterol Seviyeleri:\n\nHastaların kolestorel değerlerini göstermektedir.\n\nAçlık Kan Şekeri:\n\nHastaların açlık kan şekeri değerlerini göztermektedir.\n\nDinlenme EKG Sonuçları:\n\nHastaların dinlenme EKG sonuçları normal, ST veya LVH olarak kategorize edilmiş.\n\nMaksimum Kalp Atış Hızı:\n\nHastaların egzersiz sırasındakş maksimum kalp atış hızlarını göstermektedir.\n\nEgzersiz Anginası:\n\nKalbi besleyen atardamarların darlık, tıkanma gibi sebeplerle kalbin oksijen ihtiyacını karşılayamadığı durumlarda kalp kökenli göğüs ağrısı veya sıkıntı hissi oluşur ve buna tıp dilinde veya latince angina pektoris adı verilir.\n\nOldpeak:\n\nDinlenmeye göre egzersizin neden olduğu ST depresyonu (‘ST’, EKG grafiğindeki konumlarla ilgilidir.\n\nST Eğimi:\n\nST eğimi, Up (Yukarı), Flat (Düz) ve Down (Aşağı) olarak kategorize edilmiş.\n\nKalp Hastalığı:\n\nKalp hastalığı olan hastalar 1, kalp hastalığı olmayan hastalar 0 ile kategorize edilmiştir."
   },
   {
     "objectID": "proje.html#tercih-sebebi",
     "href": "proje.html#tercih-sebebi",
-    "title": "Proje X (proje adını yazınız)",
+    "title": "KALP HASTALIKLARI TAHMİNLEME",
     "section": "2.3 Tercih Sebebi",
-    "text": "2.3 Tercih Sebebi\nxxxxxx"
+    "text": "2.3 Tercih Sebebi\nKalp hastalıklarının önceden belirli özelliklere bağlı olarak tahmin edilip edilemeyeceği üzerine çalışmak ve toplumdaki genel kanı olan, kalp hastalıklarının kalıtsal olduğu inancını irdelemek."
   },
   {
     "objectID": "proje.html#ön-işleme",
@@ -361,28 +361,28 @@
   {
     "objectID": "proje.html#keşifsel-veri-analizi",
     "href": "proje.html#keşifsel-veri-analizi",
-    "title": "Proje X (proje adını yazınız)",
+    "title": "KALP HASTALIKLARI TAHMİNLEME",
     "section": "3.1 Keşifsel Veri Analizi",
     "text": "3.1 Keşifsel Veri Analizi\nxxxxxx"
   },
   {
     "objectID": "proje.html#trend-analizi",
     "href": "proje.html#trend-analizi",
-    "title": "Proje X (proje adını yazınız)",
+    "title": "KALP HASTALIKLARI TAHMİNLEME",
     "section": "3.2 Trend Analizi",
     "text": "3.2 Trend Analizi\nxxxxxx"
   },
   {
     "objectID": "proje.html#model-uydurma",
     "href": "proje.html#model-uydurma",
-    "title": "Proje X (proje adını yazınız)",
+    "title": "KALP HASTALIKLARI TAHMİNLEME",
     "section": "3.3 Model Uydurma",
     "text": "3.3 Model Uydurma\nxxxxxx"
   },
   {
     "objectID": "proje.html#sonuçlar",
     "href": "proje.html#sonuçlar",
-    "title": "Proje X (proje adını yazınız)",
+    "title": "KALP HASTALIKLARI TAHMİNLEME",
     "section": "3.4 Sonuçlar",
     "text": "3.4 Sonuçlar\nxxxxxx"
   },

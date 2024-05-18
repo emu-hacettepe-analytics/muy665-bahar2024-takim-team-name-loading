@@ -73,7 +73,7 @@ Kalp hastalıklarının önceden belirli özelliklere bağlı olarak tahmin edil
 
 # Analiz
 
-xxxxxx
+xxxx
 
 ## Keşifsel Veri Analizi
 

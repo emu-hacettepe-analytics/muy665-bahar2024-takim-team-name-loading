@@ -33,7 +33,7 @@ Bu veri setini halihazırda bağımsız olarak mevcut olan ancak daha önce birl
 
 3.  **Dinlenme Kan Basıncı**:
 
-    -   Hastaların herhangi bir egzersiz yapmadığı sıradakş kan basınçlarını mm/HG cinsinden göstermektedir.
+    -   Hastaların herhangi bir egzersiz yapmadığı sıradaki kan basınçlarını mm/HG cinsinden göstermektedir.
 
 4.  **Kolesterol Seviyeleri**:
 
@@ -95,7 +95,7 @@ age_heart_disease <- data %>%
 ggplot(age_heart_disease, aes(x = Yas, y = percent)) +
   geom_area(fill = "lightblue", alpha = 0.5) +
   geom_line(color = "blue") +
-  labs(title = "Yaşlara Göre Kalp Hastalığı Olma Durumu",
+  labs(title = "Yaşlara Göre Kalp Hastalığı Olma Yüzdesi",
        x = "Yaş",
        y = "Kalp Hastalığı Olma Oranı (%)") +
   theme_minimal()

@@ -240,10 +240,7 @@
     "href": "takim.html",
     "title": "Takım Üyeleri",
     "section": "",
-    "text": "Takım Üyelerimizin detaylı özgemişlerinin yer aldığı kişisel sayfalarına gitmek için sol menüyü veya aşağıdaki linkleri kullanabilirsiniz.\n\nTakım Üyeleri\n\nAli Barış Saraç\nKubilay Berk Destur\nFurkan Ferhat Şahinöz\n\n\n\n\n\n Back to top",
-    "crumbs": [
-      "Takım Üyeleri"
-    ]
+    "text": "Takım Üyelerimizin detaylı özgemişlerinin yer aldığı kişisel sayfalarına gitmek için sol menüyü veya aşağıdaki linkleri kullanabilirsiniz.\n\nTakım Üyeleri\n\nAli Barış Saraç\nKubilay Berk Destur\nFurkan Ferhat Şahinöz\n\n\n\n\n\n Back to top"
   },
   {
     "objectID": "proje.html",
@@ -342,7 +339,11 @@
     "href": "proje.html#veri-hakkında-genel-bilgiler",
     "title": "KALP HASTALIKLARI TAHMİNLEME",
     "section": "2.2 Veri Hakkında Genel Bilgiler",
+<<<<<<< HEAD
     "text": "2.2 Veri Hakkında Genel Bilgiler\nBu veri setini halihazırda bağımsız olarak mevcut olan ancak daha önce birleştirilmemiş farklı veri setlerinin birleştirilmesiyle oluşturduk. Veri setimizde 5 kalp veri setini 11 ortak özellik üzerinden birleştirdik. Toplam gözlem sayımız tekrarlanan satırlar çıkarıldığında 918 gözlemdir.\n\n\nR Talimatları\nlibrary(gridExtra)\nlibrary(ggplot2)\nlibrary(tidyverse)\nlibrary(readxl)\nlibrary(knitr)\nlibrary(kableExtra)\nlibrary(lattice)\nlibrary(caret)\nlibrary(e1071)\nlibrary(forecast)\nlibrary(pander)\ndata &lt;- read_excel(\"heart1.xlsx\")\nhead(data)\n\n\n# A tibble: 6 × 12\n    Yas Cinsiyet Agri_Tipi Dinlenme_Kan_Basinci mm…¹ Kolestorel Aclik_Kan_Sekeri\n  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;                         &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;\n1    40 Erkek    ATA                             140        289                0\n2    49 Kadin    NAP                             160        180                0\n3    37 Erkek    ATA                             130        283                0\n4    48 Kadin    ASY                             138        214                0\n5    54 Erkek    NAP                             150        195                0\n6    39 Erkek    NAP                             120        339                0\n# ℹ abbreviated name: ¹​`Dinlenme_Kan_Basinci mm/HG`\n# ℹ 6 more variables: Dinlenme_EKG &lt;chr&gt;, Maks_Kalp_Atis &lt;dbl&gt;,\n#   Egzersiz_Angina &lt;chr&gt;, Oldpeak &lt;dbl&gt;, ST_Egimi &lt;chr&gt;, Kalp_Hastaligi &lt;dbl&gt;\n\n\n\nYaş ve Cinsiyet:\n\nVerimizde yaş ve cinsiyet faktörleri yer almaktadır.\n\nAğrı Tipi:\n\nATA (Atipik Angina), NAP (Non-Anginal Pain), ASY (Asemptomatik), TA (Tipik Angina) gibi farklı göğüs ağrısı tipleri mevcuttur.\n\nDinlenme Kan Basıncı:\n\nHastaların herhangi bir egzersiz yapmadığı sıradaki kan basınçlarını mm/HG cinsinden göstermektedir.\n\nKolesterol Seviyeleri:\n\nHastaların kolestorel değerlerini göstermektedir.\n\nAçlık Kan Şekeri:\n\nHastaların açlık kan şekeri değerlerini göztermektedir.\n\nDinlenme EKG Sonuçları:\n\nHastaların dinlenme EKG sonuçları normal, ST veya LVH olarak kategorize edilmiş.\n\nMaksimum Kalp Atış Hızı:\n\nHastaların egzersiz sırasındakş maksimum kalp atış hızlarını göstermektedir.\n\nEgzersiz Anginası:\n\nKalbi besleyen atardamarların darlık, tıkanma gibi sebeplerle kalbin oksijen ihtiyacını karşılayamadığı durumlarda kalp kökenli göğüs ağrısı veya sıkıntı hissi oluşur ve buna tıp dilinde veya latince angina pektoris adı verilir.\n\nOldpeak:\n\nDinlenmeye göre egzersizin neden olduğu ST depresyonu (‘ST’, EKG grafiğindeki konumlarla ilgilidir.\n\nST Eğimi:\n\nST eğimi, Up (Yukarı), Flat (Düz) ve Down (Aşağı) olarak kategorize edilmiş.\n\nKalp Hastalığı:\n\nKalp hastalığı olan hastalar 1, kalp hastalığı olmayan hastalar 0 ile kategorize edilmiştir."
+=======
+    "text": "2.2 Veri Hakkında Genel Bilgiler\nBu veri setini halihazırda bağımsız olarak mevcut olan ancak daha önce birleştirilmemiş farklı veri setlerinin birleştirilmesiyle oluşturduk. Veri setimizde 5 kalp veri setini 11 ortak özellik üzerinden birleştirdik. Toplam gözlem sayımız tekrarlanan satırlar çıkarıldığında 918 gözlemdir.\n\nYaş ve Cinsiyet:\n\nVerimizde yaş ve cinsiyet faktörleri yer almaktadır.\n\nAğrı Tipi:\n\nATA (Atipik Angina), NAP (Non-Anginal Pain), ASY (Asemptomatik), TA (Tipik Angina) gibi farklı göğüs ağrısı tipleri mevcuttur.\n\nDinlenme Kan Basıncı:\n\nHastaların herhangi bir egzersiz yapmadığı sıradaki kan basınçlarını mm/HG cinsinden göstermektedir.\n\nKolesterol Seviyeleri:\n\nHastaların kolestorel değerlerini göstermektedir.\n\nAçlık Kan Şekeri:\n\nHastaların açlık kan şekeri değerlerini göztermektedir.\n\nDinlenme EKG Sonuçları:\n\nHastaların dinlenme EKG sonuçları normal, ST veya LVH olarak kategorize edilmiş.\n\nMaksimum Kalp Atış Hızı:\n\nHastaların egzersiz sırasındakş maksimum kalp atış hızlarını göstermektedir.\n\nEgzersiz Anginası:\n\nKalbi besleyen atardamarların darlık, tıkanma gibi sebeplerle kalbin oksijen ihtiyacını karşılayamadığı durumlarda kalp kökenli göğüs ağrısı veya sıkıntı hissi oluşur ve buna tıp dilinde veya latince angina pektoris adı verilir.\n\nOldpeak:\n\nDinlenmeye göre egzersizin neden olduğu ST depresyonu (‘ST’, EKG grafiğindeki konumlarla ilgilidir.\n\nST Eğimi:\n\nST eğimi, Up (Yukarı), Flat (Düz) ve Down (Aşağı) olarak kategorize edilmiş.\n\nKalp Hastalığı:\n\nKalp hastalığı olan hastalar 1, kalp hastalığı olmayan hastalar 0 ile kategorize edilmiştir."
+>>>>>>> 64c57fe0f0bc06189e5ffc7897fa3dbdee77d36e
   },
   {
     "objectID": "proje.html#tercih-sebebi",
@@ -611,22 +612,14 @@
     "href": "takim/furkan_ferhat_sahinoz.html#işler",
     "title": "Furkan Ferhat ŞAHİNÖZ",
     "section": "İşler",
-    "text": "İşler\n\nOrtana Elektronik Yazılım, Proje Mühendisi, 02.2022- (Halen Devam Ediyor)\nRa-Ya&Hasanoglu İş Ortaklığı, Şantiye Şefi, 02.2021-07.2021\nProyap İnşaat AŞ, Şantiye Şefi, 03.2021-01.2022",
-    "crumbs": [
-      "Takım Üyeleri",
-      "Furkan Ferhat ŞAHİNÖZ"
-    ]
+    "text": "İşler\n\nOrtana Elektronik Yazılım, Proje Mühendisi, 02.2022- (Halen Devam Ediyor)\nRa-Ya&Hasanoglu İş Ortaklığı, Şantiye Şefi, 02.2021-07.2021\nProyap İnşaat AŞ, Şantiye Şefi, 03.2021-01.2022"
   },
   {
     "objectID": "takim/furkan_ferhat_sahinoz.html#stajlar",
     "href": "takim/furkan_ferhat_sahinoz.html#stajlar",
     "title": "Furkan Ferhat ŞAHİNÖZ",
     "section": "Stajlar",
-    "text": "Stajlar\n\nAselsan AŞ, 1 ay",
-    "crumbs": [
-      "Takım Üyeleri",
-      "Furkan Ferhat ŞAHİNÖZ"
-    ]
+    "text": "Stajlar\n\nAselsan AŞ, 1 ay"
   },
   {
     "objectID": "docs/takim/furkan_ferhat_sahinoz.html",

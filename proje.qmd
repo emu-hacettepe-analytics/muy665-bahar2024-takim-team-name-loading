@@ -331,11 +331,77 @@ Görüldüğü üzere, kalp hastalığının yaşla birlikte arttığını açı
 
 ## Model Uydurma
 
-xxxxxx
+Elimizdeki veri seti için bir tahmin modeli oluşturmak istedik, Bu modelin incelediğimiz veri seti kapsamında veri setindeki öznitelikler kapsamında Kalp Hastası olup olmadığının sonucunu belirli oranlarda doğru olarak tahmin etmesi için çalışmalar yaptık.
+
+İlk olarak ilgili veri setindeki kategorik değişkenleri vektörlere çevirdik, daha sonra elimizdeki veri setinin %80 inceleme %20 test verisi olacak şekilde ayırdık. Tüm değişkenleri vektör yaptıktan sonra Lojistik Regresyon Modeli uygulayarak bir model çıkardık ilgili modelin katsayıları aşağıdadır.
+
+```{r  message=FALSE}
+#| code-fold: true
+#| code-summary: "R Talimatları"
+data <- read_excel("heart1.xlsx")
+colnames(df_total) <- c("Yas", "Cinsiyet", "Agri_Tipi", "Dinlenme_Kan_Basinci", "Kolestorel", "Aclik_Kan_Sekeri", "Dinlenme_EKG", "Maks_Kalp_Atis", "Egzersiz_Angina", "Oldpeak", "ST_Egimi", "Kalp_Hastaligi")
+
+df_total$Cinsiyet <- as.factor(df_total$Cinsiyet)
+df_total$Agri_Tipi <- as.factor(df_total$Agri_Tipi)
+df_total$Dinlenme_EKG <- as.factor(df_total$Dinlenme_EKG)
+df_total$Egzersiz_Angina <- as.factor(df_total$Egzersiz_Angina)
+df_total$ST_Egimi <- as.factor(df_total$ST_Egimi)
+df_total$Kalp_Hastaligi <- as.factor(df_total$Kalp_Hastaligi)
+
+set.seed(123)
+trainIndex <- createDataPartition(df_total$Kalp_Hastaligi, p = .8, 
+                                  list = FALSE, 
+                                  times = 1)
+data_train <- df_total[trainIndex, ]
+data_test  <- df_total[-trainIndex, ]
+
+model <- glm(Kalp_Hastaligi ~ ., data = data_train, family = binomial)
+print(model)
+```
+
+Regresyon modeli değerleri ve katsayıları yukarıda yer almaktadır. Bu modeli kullanarak yapılan tahminleri test verisi ile test ettik ve sonuçları için karmaşıklı matrisinde aşağıdaki gibi yazdırdık.
+
+```{r  message=FALSE}
+#| code-fold: true
+#| code-summary: "R Talimatları"
+data <- read_excel("heart1.xlsx")
+colnames(df_total) <- c("Yas", "Cinsiyet", "Agri_Tipi", "Dinlenme_Kan_Basinci", "Kolestorel", "Aclik_Kan_Sekeri", "Dinlenme_EKG", "Maks_Kalp_Atis", "Egzersiz_Angina", "Oldpeak", "ST_Egimi", "Kalp_Hastaligi")
+
+df_total$Cinsiyet <- as.factor(df_total$Cinsiyet)
+df_total$Agri_Tipi <- as.factor(df_total$Agri_Tipi)
+df_total$Dinlenme_EKG <- as.factor(df_total$Dinlenme_EKG)
+df_total$Egzersiz_Angina <- as.factor(df_total$Egzersiz_Angina)
+df_total$ST_Egimi <- as.factor(df_total$ST_Egimi)
+df_total$Kalp_Hastaligi <- as.factor(df_total$Kalp_Hastaligi)
+set.seed(123)
+trainIndex <- createDataPartition(df_total$Kalp_Hastaligi, p = .8, 
+                                  list = FALSE, 
+                                  times = 1)
+data_train <- df_total[trainIndex, ]
+data_test  <- df_total[-trainIndex, ]
+model <- glm(Kalp_Hastaligi ~ ., data = data_train, family = binomial)
+
+#########################################################################HATA ANALİZİ###############################
+predictions <- predict(model, data_test, type = "response")
+predicted_classes <- ifelse(predictions > 0.5, 1, 0)
+
+predicted_classes <- as.factor(predicted_classes)
+levels(predicted_classes) <- levels(data_test$Kalp_Hastaligi)
+confusionMatrix(predicted_classes, data_test$Kalp_Hastaligi)
+cm <- confusionMatrix(predicted_classes, data_test$Kalp_Hastaligi)
+
+
+```
+
+-   **Doğru Negatifler (TN)**: 73 (Modelin 0 olarak doğru tahmin ettiği ve gerçekte de 0 olan)
+
+-   **Yanlış Negatifler (FN)**: 7 (Modelin 0 olarak yanlış tahmin ettiği ve gerçekte 1 olan)
+
+-   **Yanlış Pozitifler (FP)**: 9 (Modelin 1 olarak yanlış tahmin ettiği ve gerçekte 0 olan)
+
+-   **Doğru Pozitifler (TP)**: 94 (Modelin 1 olarak doğru tahmin ettiği ve gerçekte de 1 olan)
 
 ## Sonuçlar
-
-xxxxxx
 
 # Sonuçlar ve Ana Çıkarımlar
 

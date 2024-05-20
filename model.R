@@ -1,8 +1,4 @@
-install.packages("caret")
-install.packages("e1071")
-install.packages("forecast")
-install.packages("knitr")
-install.packages("kableExtra")
+
 library(knitr)
 library(kableExtra)
 
@@ -38,7 +34,7 @@ predicted_classes <- as.factor(predicted_classes)
 levels(predicted_classes) <- levels(data_test$Kalp_Hastaligi)
 confusionMatrix(predicted_classes, data_test$Kalp_Hastaligi)
 cm <- confusionMatrix(predicted_classes, data_test$Kalp_Hastaligi)
-
+cm
 
 data_test$Kalp_Hastaligi <- as.numeric(as.character(data_test$Kalp_Hastaligi))
 residuals <- data_test$Kalp_Hastaligi - predictions
@@ -48,10 +44,11 @@ acf_result <- acf(residuals, plot = FALSE)
 str(acf_result)
 # ACF grafiğini çizdirin
 plot(acf_result, main = "Hataların otokolerosyonu", xlab = "Lag", ylab = "ACF")
+summary(model)
+plot(model, main = "Doğrusal Trend Analizi", ylab = "Değer", xlab = "Zaman")
+abline(linear_model, col = "red")
 
 
 
 
 
-# Gerçek değerlerle karşılaştırma
-confusionMatrix(as.factor(predicted_classes), data_test$Kalp_Hastaligi)

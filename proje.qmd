@@ -403,6 +403,6 @@ cm <- confusionMatrix(predicted_classes, data_test$Kalp_Hastaligi)
 
 ## Sonuçlar
 
-# Sonuçlar ve Ana Çıkarımlar
+Sonuç olarak veri setindeki değişkenlerin birbirleriyle olan ilişkilerine anlamlı grafikler çizdirerek baktık, incelenen grafiklerden net sonuçlar yaşın, egzersiz anginanın, Agri tipinin ve ST eğiminin kalp hastalığı üzerinde diğer etkilerden daha ağırlıklı olduğunu gördük. Bunun yanında cinsiyet farkınında hastalığa etkisi önemli bir soru ortaya çıkardı, veri setinde cinsiyetlerin sayılarının eşitlenmesinden sonra tekrar analizler yapılarak daha doğru sonuçlara ulaşılabilir. Elde edilen Regresyon modeli %91 oranında doğru sonuçlar ortaya çıkarmaktadır. Ama tabiki bu sonuç test verimizde denendiği için başka test verilerinde de denenerek test edilmelidir. Bunların yanında karar ağacı modeli ile bir tahmin methodu geliştirdik bu method ile istenilen verileri girmeniz durumunda kalp hastası olup olmadığınız konusunda bir tahmin cevabı alabilirsiniz.
 
-xxxxxx
+# Sonuçlar ve Ana Çıkarımlar

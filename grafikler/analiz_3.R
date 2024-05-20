@@ -44,3 +44,14 @@ ggplot(df_total, aes(x = Yas, fill = factor(Kalp_Hastaligi))) +
   labs(title = "Yaşa Göre Kalp Hastalığı Durumu", x = "Yaş", y = "Frekans") +
   theme_minimal(base_size = 15)
 
+
+
+
+
+
+
+
+
+
+
+

@@ -7,7 +7,7 @@ number-sections: true
 
 ![](images/13up-healthlife-superJumbo-v2.gif){width="616"}
 
-# Kalp Hastalıkları Tahminleme Projejimizi Tanıyalım
+# Kalp Hastalıkları Tahminleme Projemizi Tanıyalım
 
 # Veri
 
@@ -22,6 +22,24 @@ Link: <https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/>
 ## Veri Hakkında Genel Bilgiler
 
 Bu veri setini halihazırda bağımsız olarak mevcut olan ancak daha önce birleştirilmemiş farklı veri setlerinin birleştirilmesiyle oluşturduk. Veri setimizde 5 kalp veri setini 11 ortak özellik üzerinden birleştirdik. Toplam gözlem sayımız tekrarlanan satırlar çıkarıldığında 918 gözlemdir.
+
+```{r  message=FALSE}
+#| code-fold: true
+#| code-summary: "R Talimatları"
+library(gridExtra)
+library(ggplot2)
+library(tidyverse)
+library(readxl)
+library(knitr)
+library(kableExtra)
+library(lattice)
+library(caret)
+library(e1071)
+library(forecast)
+library(pander)
+data <- read_excel("heart1.xlsx")
+head(data)
+```
 
 1.  **Yaş ve Cinsiyet**:
 
@@ -73,14 +91,223 @@ Kalp hastalıklarının önceden belirli özelliklere bağlı olarak tahmin edil
 
 # Analiz
 
+Data analizine str fonksiyonu ile başlıyoruz.
+
+```{r  message=FALSE}
+#| code-fold: true
+#| code-summary: "R Talimatları"
+library(readxl)
+data <- read_excel("heart1.xlsx")
+
+str(data)
+```
+
+Verinin istatiksel özeti:
+
+NA veri var mı?
+
 ```{r  message=FALSE}
 #| code-fold: true
 #| code-summary: "R Talimatları"
 
+df_total <- read_excel("heart1.xlsx")
+sum(is.na(df_total))
+# Veri seti özetini pander kullanarak gösterme
+df_summary <- df_total %>%
+  summarise(
+    Yas_mean = mean(Yas, na.rm = TRUE),
+    Yas_sd = sd(Yas, na.rm = TRUE),
+    Dinlenme_Kan_Basinci_mean = mean(`Dinlenme_Kan_Basinci mm/HG`, na.rm = TRUE),
+    Dinlenme_Kan_Basinci_sd = sd(`Dinlenme_Kan_Basinci mm/HG`, na.rm = TRUE),
+    Kolestorel_mean = mean(Kolestorel, na.rm = TRUE),
+    Kolestorel_sd = sd(Kolestorel, na.rm = TRUE),
+    Aclik_Kan_Sekeri_mean = mean(Aclik_Kan_Sekeri, na.rm = TRUE),
+    Aclik_Kan_Sekeri_sd = sd(Aclik_Kan_Sekeri, na.rm = TRUE),
+    Maks_Kalp_Atis_mean = mean(Maks_Kalp_Atis, na.rm = TRUE),
+    Maks_Kalp_Atis_sd = sd(Maks_Kalp_Atis, na.rm = TRUE),
+    Oldpeak_mean = mean(Oldpeak, na.rm = TRUE),
+    Oldpeak_sd = sd(Oldpeak, na.rm = TRUE)
+  ) %>%
+  gather(key = "Metric", value = "Value")
 
-library(ggplot2)
-library(tidyverse)
-library(readxl)
+# Daha güzel bir tablo olarak gösterme
+df_summary %>%
+  kable("html", caption = "Veri Seti Özet İstatistikleri") %>%
+  kable_styling("striped", full_width = F)
+
+```
+
+Bu özet istatistikler, veri setinin genel sağlığını ve popülasyonun sağlık profillerini anlamak için kritik bilgiler sağlar. Daha detaylı analizler ve grafikler, bu özet istatistiklerin altında yatan ilişkileri ve trendleri ortaya çıkarmaya yardımcı olabilir.
+
+## Keşifsel Veri Analizi
+
+Veri setindeki cinsiyet dağılımı:
+
+Erkekler, tüm yaş aralıklarında kadınlardan daha fazla sayıya sahip olduğu net olarak görülmektedir.\
+Her iki cinsiyet de 50-55 yaş aralığında zirve yapmaktadır. 30-45 yaş aralığında ve 65-75 yaş aralığında erkeklerin sayısı belirgin şekilde daha fazla görülmektedir.
+
+```{r  message=FALSE}
+#| code-fold: true
+#| code-summary: "R Talimatları"
+df_total <- read_excel("heart1.xlsx")
+erkek_sayisi <- sum(df_total$Cinsiyet == "Erkek")
+kadin_sayisi <- sum(df_total$Cinsiyet == "Kadin")
+cat("Erkek sayısı:", erkek_sayisi, "\n")
+cat("Kadın sayısı:", kadin_sayisi, "\n")
+barplot(table(df_total$Cinsiyet), main = "Cinsiyet Dağılımı", xlab = "Cinsiyet", ylab = "Kişi Sayısı", col = c("blue", "pink"), legend = c("Erkek", "Kadın"))
+
+ggplot(df_total, aes(x = Yas, fill = Cinsiyet)) +
+  geom_histogram(position = "identity", alpha = 0.5, bins = 10) +
+  scale_fill_manual(values = c("blue", "red")) +
+  labs(x = "Yaş", y = "Frekans", title = "Erkek ve Kadınların Yaş Dağılımları") +
+  theme_minimal()+
+  scale_x_continuous(breaks = seq(30, 70, by = 5))+
+  scale_y_continuous(breaks = seq(0, 200, by = 10))
+```
+
+Bu veri dünya genelinde kalp hastalığı rahatsızlığı ile hastaneye başvuranların, büyük kısmının erkek olması sebebiyle erkekler kalp rahatsızlığına daha yatkın olabilir mi? sorusu ortaya atmaktadır.
+
+```{r  message=FALSE}
+#| code-fold: true
+#| code-summary: "R Talimatları"
+data <- read_excel("heart1.xlsx")
+df_summary <- df_total %>%
+  group_by(Cinsiyet, Kalp_Hastaligi) %>%
+  summarise(count = n()) %>%
+  ungroup() %>%
+  group_by(Cinsiyet) %>%
+  mutate(total = sum(count), proportion = count / total * 100) %>%
+  filter(Kalp_Hastaligi == 1)
+
+ggplot(df_summary, aes(x = Cinsiyet, y = proportion, fill = Cinsiyet)) +
+  geom_bar(stat = "identity", alpha = 0.7) +
+  scale_fill_manual(values = c("Erkek" = "#9999FF", "Kadin" = "#FF9999")) +
+  labs(title = "Cinsiyet & Kalp Hastalığına Yakalanma Oranı(%)", x = "Cinsiyet", y = "Kalp Hastalığına Yakalanma Oranı(%)") +
+  theme_minimal(base_size = 15)+
+  theme(
+   plot.title = element_text(size = 14),
+    axis.title.x = element_text(size = 12),
+    axis.title.y = element_text(size = 12)
+  ) +
+    geom_text(aes(label = paste0(round(proportion, 1), "%")), vjust = -0.5, size = 5)
+
+
+```
+
+```{r warning = FALSE}
+#| code-fold: true
+#| code-summary: "R Talimatları"
+
+
+df_total <- read_excel("heart1.xlsx")
+par(mar = c(5, 5, 4, 2) + 0.1)  
+
+
+df_filtered <- df_total[df_total$Kolestorel > 0,]# Kolesterol değeri sıfır olanları filtrele
+
+plot(df_filtered$`Dinlenme_Kan_Basinci mm/HG`, df_filtered$Kolestorel, 
+     xlab = "Dinlenme Kan Basıncı (mm/HG)", 
+     ylab = "Kolesterol", 
+     main = "Kan Basıncı ve Kolesterol İlişkisi", 
+     col = ifelse(df_total$Kalp_Hastaligi == 1, "red", "blue"),
+     pch = 19,  # Noktaların şelki
+     cex = 0.5, # Nokta boyutu
+     lwd = 2,# Nokta çizgi kalınlığı
+     alpha = 0.5)  # Nokta saydamlgııı 
+legend("topright", 
+       legend = c("Kalp Hastalığı Yok", "Kalp Hastalığı Var"), 
+       col = c("blue", "red"), 
+       pch = 19, 
+       pt.cex = 1.1, # Nokta boyutu
+       cex = 0.5,    # Metin boyutu
+       title = "Kalp Hastalığı", 
+       bg = "yellow",  # Arkaplan renk
+       box.lwd = 1.5) # Kutu çizgi kalınlıgıı
+
+
+```
+
+Görüldüğü üzere, genel eğilim, dinlenme kan basıncının yüksek olduğu durumlarda kolesterol seviyelerinin arttığı yönündedir. Ayrıca, kalp hastalığı olan bireylerin genellikle daha yüksek kolesterol seviyelerine sahip olduğu gözlemlenmektedir.Ancak, bu ilişkinin kesin olmadığını belirtmek gerekir, çünkü bazı düşük dinlenme kan basıncı değerlerine sahip bireylerin yine de yüksek kolesterol seviyelerine sahip olduğu noktalar görülebilmektedir.
+
+Bunların yanında bu grafikte Dinlenme Kan Basıncı 120- 140 - 160 mm/HG değerlerinde bir patern görülmektedir. Bu paterinin ölçümleri yuvarlayan doktorlar veya hemşirelerden kaynaklandığı düşünülmektedir.
+
+Kolesterol değerleri 400'ün üzerine çıktığında kalp hastalığı olan bireylerin sayısında artış gözlemleniyor.
+
+Kırmızı ve mavi noktalar arasında belirgin bir ayrım yok gibi görünüyor; bu, dinlenme kan basıncı ve kolesterol değerlerinin tek başına kalp hastalığını öngörmede yeterli olmadığını gösterebilir.
+
+```{r warning = FALSE}
+#| code-fold: true
+#| code-summary: "R Talimatları"
+data <- read_excel("heart1.xlsx")
+par(mfrow = c(2, 2), oma = c(0, 0, 2, 0), mar = c(4, 4, 2, 1), cex.lab = 0.8, cex.main = 1, cex.axis = 0.8)
+df_filtered <- df_total[df_total$Kolestorel > 0,]
+boxplot(df_filtered$Kolestorel ~ df_filtered$Kalp_Hastaligi, # Kolesterol ve Kalp Hastalığı
+        main = "Kolesterol - Hastalık", 
+        xlab = "Hastalık", 
+        ylab = "Kolesterol", 
+        col = c("turquoise", "coral"), 
+        names = c("Hayır", "Evet"))
+
+
+boxplot(data$`Dinlenme_Kan_Basinci mm/HG` ~ data$Kalp_Hastaligi, # Dinlenme Kan Basıncı ve Kalp Hastalığı
+        main = "Dinlenme Kan Basıncı - Hastalık", 
+        xlab = "Hastalık", 
+        ylab = "Dinlenme Kan Basıncı (mm/HG)", 
+        col = c("turquoise", "coral"), 
+        names = c("Hayır", "Evet"))
+
+
+boxplot(data$Maks_Kalp_Atis ~ data$Kalp_Hastaligi, # Maksimum Kalp Atışı ve Kalp Hastalığı
+        main = "Maksimum Kalp Atışı-Hastalık", 
+        xlab = "Hastalık", 
+        ylab = "Maksimum Kalp Atışı", 
+        col = c("turquoise", "coral"), 
+        names = c("Hayır", "Evet"))
+
+
+boxplot(data$Yas ~ data$Kalp_Hastaligi, # Yaş ve Kalp Hastalığı
+        main = "Yaş - Hastalık", 
+        xlab = "HHastalık", 
+        ylab = "Yaş", 
+        col = c("turquoise", "coral"), 
+        names = c("Hayır", "Evet"))
+title("Boxplots Niteliklerin Hastalığa Etkisi", outer = TRUE, cex.main = 1)
+```
+
+Kalp hastalığı olmayan bireylerde maksimum kalp atışı genellikle daha yüksek (medyan yaklaşık 160)
+
+Kalp hastalığı olmayan bireylerin yaş aralığı genellikle daha düşük ve daha dar bir aralıkta yoğunlaşmış (medyan yaklaşık 45).\
+Kalp hastalığı olan bireylerde yaş daha geniş bir aralıkta dağılmış ve daha yüksek (medyan yaklaşık 55).\
+Bu da yaşın, kalp hastalığı için önemli bir risk faktörü olduğunu göstermektedir.
+
+Veriler, kalp hastalığı olan bireylerin genellikle daha yüksek kolesterol ve dinlenme kan basıncına sahip olduğunu, ancak maksimum kalp atışlarının ve yaşlarının daha yüksek olduğunu göstermektedir.
+
+```{r  message=FALSE}
+#| code-fold: true
+#| code-summary: "R Talimatları"
+df_total$Kalp_Hastaligi <- as.factor(df_total$Kalp_Hastaligi)
+df_total$Agri_Tipi <- as.factor(df_total$Agri_Tipi)
+
+ggplot(data = df_total, aes(x = Agri_Tipi, fill = Kalp_Hastaligi)) +
+  geom_bar(position = "fill") +
+  scale_y_continuous(labels = scales::percent) +
+  labs(title = "Agri Tipi ve Kalp Hastaligi Orani",
+       x = "Agri Tipi",
+       y = "Oran",
+       fill = "Kalp Hastaligi") +
+  theme_minimal()
+```
+
+Bu grafik, hangi ağrı tiplerinin kalp hastalığı ile daha çok ilişkilendirildiğini görselleştirerek analiz etmeye yardımcı olur. Örneğin, TA (Asimptomatik) ağrı tipi olan bireylerin arasında kalp hastalığına sahip olanların oranının diğer ağrı tiplerine göre daha yüksek olduğu gözlemlenmektedir.
+
+## Trend Analizi
+
+İlgili veri setinde dikkatimizi çeken ve gözlem verileriyle ispatlamak istediğimiz YAŞ ve KALP HASTALIĞI arasindaki trend oldu
+
+```{r  message=FALSE}
+#| code-fold: true
+#| code-summary: "R Talimatları"
+
 data <- read_excel("heart1.xlsx")
 
 
@@ -91,7 +318,6 @@ age_heart_disease <- data %>%
   mutate(total = `0` + `1`,
          percent = `1` / total * 100)
 
-# Grafiği oluşturma
 ggplot(age_heart_disease, aes(x = Yas, y = percent)) +
   geom_area(fill = "lightblue", alpha = 0.5) +
   geom_line(color = "blue") +
@@ -99,24 +325,83 @@ ggplot(age_heart_disease, aes(x = Yas, y = percent)) +
        x = "Yaş",
        y = "Kalp Hastalığı Olma Oranı (%)") +
   theme_minimal()
-
 ```
 
-## Keşifsel Veri Analizi
-
-xxxxxx
-
-## Trend Analizi
-
-xxxxxx
+Görüldüğü üzere, kalp hastalığının yaşla birlikte arttığını açıkça göstermektedir. Genç yaşlarda oran daha düşükken, yaşlandıkça kalp hastalığına sahip olma oranı önemli ölçüde yükselmektedir.
 
 ## Model Uydurma
 
-xxxxxx
+Elimizdeki veri seti için bir tahmin modeli oluşturmak istedik, Bu modelin incelediğimiz veri seti kapsamında veri setindeki öznitelikler kapsamında Kalp Hastası olup olmadığının sonucunu belirli oranlarda doğru olarak tahmin etmesi için çalışmalar yaptık.
+
+İlk olarak ilgili veri setindeki kategorik değişkenleri vektörlere çevirdik, daha sonra elimizdeki veri setinin %80 inceleme %20 test verisi olacak şekilde ayırdık. Tüm değişkenleri vektör yaptıktan sonra Lojistik Regresyon Modeli uygulayarak bir model çıkardık ilgili modelin katsayıları aşağıdadır.
+
+```{r  message=FALSE}
+#| code-fold: true
+#| code-summary: "R Talimatları"
+data <- read_excel("heart1.xlsx")
+colnames(df_total) <- c("Yas", "Cinsiyet", "Agri_Tipi", "Dinlenme_Kan_Basinci", "Kolestorel", "Aclik_Kan_Sekeri", "Dinlenme_EKG", "Maks_Kalp_Atis", "Egzersiz_Angina", "Oldpeak", "ST_Egimi", "Kalp_Hastaligi")
+
+df_total$Cinsiyet <- as.factor(df_total$Cinsiyet)
+df_total$Agri_Tipi <- as.factor(df_total$Agri_Tipi)
+df_total$Dinlenme_EKG <- as.factor(df_total$Dinlenme_EKG)
+df_total$Egzersiz_Angina <- as.factor(df_total$Egzersiz_Angina)
+df_total$ST_Egimi <- as.factor(df_total$ST_Egimi)
+df_total$Kalp_Hastaligi <- as.factor(df_total$Kalp_Hastaligi)
+
+set.seed(123)
+trainIndex <- createDataPartition(df_total$Kalp_Hastaligi, p = .8, 
+                                  list = FALSE, 
+                                  times = 1)
+data_train <- df_total[trainIndex, ]
+data_test  <- df_total[-trainIndex, ]
+
+model <- glm(Kalp_Hastaligi ~ ., data = data_train, family = binomial)
+print(model)
+```
+
+Regresyon modeli değerleri ve katsayıları yukarıda yer almaktadır. Bu modeli kullanarak yapılan tahminleri test verisi ile test ettik ve sonuçları için karmaşıklı matrisinde aşağıdaki gibi yazdırdık.
+
+```{r  message=FALSE}
+#| code-fold: true
+#| code-summary: "R Talimatları"
+data <- read_excel("heart1.xlsx")
+colnames(df_total) <- c("Yas", "Cinsiyet", "Agri_Tipi", "Dinlenme_Kan_Basinci", "Kolestorel", "Aclik_Kan_Sekeri", "Dinlenme_EKG", "Maks_Kalp_Atis", "Egzersiz_Angina", "Oldpeak", "ST_Egimi", "Kalp_Hastaligi")
+
+df_total$Cinsiyet <- as.factor(df_total$Cinsiyet)
+df_total$Agri_Tipi <- as.factor(df_total$Agri_Tipi)
+df_total$Dinlenme_EKG <- as.factor(df_total$Dinlenme_EKG)
+df_total$Egzersiz_Angina <- as.factor(df_total$Egzersiz_Angina)
+df_total$ST_Egimi <- as.factor(df_total$ST_Egimi)
+df_total$Kalp_Hastaligi <- as.factor(df_total$Kalp_Hastaligi)
+set.seed(123)
+trainIndex <- createDataPartition(df_total$Kalp_Hastaligi, p = .8, 
+                                  list = FALSE, 
+                                  times = 1)
+data_train <- df_total[trainIndex, ]
+data_test  <- df_total[-trainIndex, ]
+model <- glm(Kalp_Hastaligi ~ ., data = data_train, family = binomial)
+
+#########################################################################HATA ANALİZİ###############################
+predictions <- predict(model, data_test, type = "response")
+predicted_classes <- ifelse(predictions > 0.5, 1, 0)
+
+predicted_classes <- as.factor(predicted_classes)
+levels(predicted_classes) <- levels(data_test$Kalp_Hastaligi)
+confusionMatrix(predicted_classes, data_test$Kalp_Hastaligi)
+cm <- confusionMatrix(predicted_classes, data_test$Kalp_Hastaligi)
+
+
+```
+
+-   **Doğru Negatifler (TN)**: 73 (Modelin 0 olarak doğru tahmin ettiği ve gerçekte de 0 olan)
+
+-   **Yanlış Negatifler (FN)**: 7 (Modelin 0 olarak yanlış tahmin ettiği ve gerçekte 1 olan)
+
+-   **Yanlış Pozitifler (FP)**: 9 (Modelin 1 olarak yanlış tahmin ettiği ve gerçekte 0 olan)
+
+-   **Doğru Pozitifler (TP)**: 94 (Modelin 1 olarak doğru tahmin ettiği ve gerçekte de 1 olan)
 
 ## Sonuçlar
-
-xxxxxx
 
 # Sonuçlar ve Ana Çıkarımlar
 

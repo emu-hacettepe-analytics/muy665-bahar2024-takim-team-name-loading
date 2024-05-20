@@ -790,13 +790,59 @@ Prediction  0  1
 </section>
 <section id="sonuçlar" class="level2" data-number="3.4">
 <h2 data-number="3.4" class="anchored" data-anchor-id="sonuçlar"><span class="header-section-number">3.4</span> Sonuçlar</h2>
+<p>Sonuç olarak veri setindeki değişkenlerin birbirleriyle olan ilişkilerine anlamlı grafikler çizdirerek baktık, incelenen grafiklerden net sonuçlar yaşın, egzersiz anginanın, Agri tipinin ve ST eğiminin kalp hastalığı üzerinde diğer etkilerden daha ağırlıklı olduğunu gördük. Bunun yanında cinsiyet farkınında hastalığa etkisi önemli bir soru ortaya çıkardı, veri setinde cinsiyetlerin sayılarının eşitlenmesinden sonra tekrar analizler yapılarak daha doğru sonuçlara ulaşılabilir. Elde edilen Regresyon modeli %91 oranında doğru sonuçlar ortaya çıkarmaktadır. Ama tabiki bu sonuç test verimizde denendiği için başka test verilerinde de denenerek test edilmelidir. Bunların yanında karar ağacı modeli ile bir tahmin methodu geliştirdik bu method ile istenilen verileri girmeniz durumunda kalp hastası olup olmadığınız konusunda bir tahmin cevabı alabilirsiniz.</p>
 </section>
 </section>
 <section id="sonuçlar-ve-ana-çıkarımlar" class="level1" data-number="4">
 <h1 data-number="4"><span class="header-section-number">4</span> Sonuçlar ve Ana Çıkarımlar</h1>
-<p>xxxxxx</p>
+<p>Bu çalışmada, beş farklı kalp veri setini birleştirerek oluşturulan ve toplam 918 gözlem içeren bir veri seti üzerinde analizler yapıldı. Analizlerde, kalp hastalığının belirli özelliklere bağlı olarak tahmin edilip edilemeyeceği incelendi ve kalp hastalıklarının kalıtsal olup olmadığı gibi genel inançlar irdelendi.</p>
+<section id="veri-keşfi-ve-ön-işleme" class="level4" data-number="4.0.0.1">
+<h4 data-number="4.0.0.1" class="anchored" data-anchor-id="veri-keşfi-ve-ön-işleme"><span class="header-section-number">4.0.0.1</span> <strong>Veri Keşfi ve Ön İşleme</strong></h4>
+<ul>
+<li><p><strong>Yaş ve Cinsiyet</strong>: Veri setinde erkeklerin sayısının kadınlara göre daha fazla olduğu görüldü. Özellikle 50-55 yaş aralığında her iki cinsiyet de zirve yapmaktadır.</p></li>
+<li><p><strong>Ağrı Tipi</strong>: Farklı göğüs ağrısı tiplerinin kalp hastalığı ile ilişkisi incelendi. TA (Asimptomatik) ağrı tipi olan bireylerin kalp hastalığına daha yatkın olduğu gözlemlendi.</p></li>
+<li><p><strong>Dinlenme Kan Basıncı ve Kolesterol</strong>: Yüksek dinlenme kan basıncı ve kolesterol seviyelerinin kalp hastalığı riskini artırdığı görüldü.</p></li>
+<li><p><strong>Diğer Değişkenler</strong>: Maksimum kalp atış hızı, egzersiz anginası, Oldpeak ve ST eğimi gibi diğer özelliklerin de kalp hastalığı ile ilişkisi incelendi.</p></li>
+</ul>
+</section>
+<section id="keşifsel-veri-analizi-1" class="level4" data-number="4.0.0.2">
+<h4 data-number="4.0.0.2" class="anchored" data-anchor-id="keşifsel-veri-analizi-1"><span class="header-section-number">4.0.0.2</span> <strong>Keşifsel Veri Analizi</strong></h4>
+<ul>
+<li><p><strong>Cinsiyet ve Kalp Hastalığı</strong>: Erkeklerin kalp hastalığına yakalanma oranının kadınlara göre daha yüksek olduğu görüldü.</p></li>
+<li><p><strong>Dinlenme Kan Basıncı ve Kolesterol İlişkisi</strong>: Dinlenme kan basıncı ve kolesterol arasındaki ilişkinin, kalp hastalığı riskini artırdığı ortaya kondu.</p></li>
+<li><p><strong>Boxplot Analizleri</strong>: Kolesterol, dinlenme kan basıncı, maksimum kalp atışı ve yaş gibi değişkenlerin kalp hastalığı üzerindeki etkileri grafiklerle gösterildi.</p></li>
+</ul>
+</section>
+<section id="model-uygulaması" class="level4" data-number="4.0.0.3">
+<h4 data-number="4.0.0.3" class="anchored" data-anchor-id="model-uygulaması"><span class="header-section-number">4.0.0.3</span> <strong>Model Uygulaması</strong></h4>
+<ul>
+<li><p><strong>Lojistik Regresyon Modeli</strong>: Lojistik regresyon modeli kullanılarak kalp hastalığı tahmini yapıldı. Modelin katsayıları incelendi ve test verisi üzerinde modelin performansı değerlendirildi.</p></li>
+<li><p><strong>Karmaşıklık Matrisi Sonuçları</strong>: Modelin doğru negatif, yanlış negatif, yanlış pozitif ve doğru pozitif sayıları hesaplandı. Modelin doğruluğu %91 olarak belirlendi.</p></li>
+<li><p><strong>Tahmin Doğruluğu</strong>: Modelin tahmin doğruluğu çeşitli performans metrikleri kullanılarak değerlendirildi ve iyi bir performans sergilediği görüldü.</p></li>
+</ul>
+</section>
+<section id="ana-çıkarımlar" class="level4" data-number="4.0.0.4">
+<h4 data-number="4.0.0.4" class="anchored" data-anchor-id="ana-çıkarımlar"><span class="header-section-number">4.0.0.4</span> <strong>Ana Çıkarımlar</strong></h4>
+<ol type="1">
+<li><p><strong>Yaş Faktörü</strong>: Yaşın, kalp hastalığı için önemli bir risk faktörü olduğu doğrulandı. Yaş arttıkça kalp hastalığına yakalanma oranı önemli ölçüde yükselmektedir.</p></li>
+<li><p><strong>Cinsiyet Farklılıkları</strong>: Erkeklerin kalp hastalığına daha yatkın olduğu ve yaş ile birlikte bu riskin arttığı gözlemlendi.</p></li>
+<li><p><strong>Ağrı Tipleri</strong>: TA (Asimptomatik) ağrı tipi olan bireylerin kalp hastalığı riskinin daha yüksek olduğu görüldü.</p></li>
+<li><p><strong>Dinlenme Kan Basıncı ve Kolesterol</strong>: Yüksek dinlenme kan basıncı ve kolesterol seviyelerinin kalp hastalığı riskini artırdığı belirlendi.</p></li>
+<li><p><strong>Model Performansı</strong>: Lojistik regresyon modelinin %91 oranında doğru tahminler yaptığı ve bu sonuçların başka test verileri ile de doğrulanması gerektiği sonucuna varıldı.</p></li>
+</ol>
+</section>
+<section id="öneriler-ve-gelecek-çalışmalar" class="level4" data-number="4.0.0.5">
+<h4 data-number="4.0.0.5" class="anchored" data-anchor-id="öneriler-ve-gelecek-çalışmalar"><span class="header-section-number">4.0.0.5</span> <strong>Öneriler ve Gelecek Çalışmalar</strong></h4>
+<ul>
+<li><p><strong>Cinsiyet Dağılımı</strong>: Veri setindeki cinsiyet dağılımının dengelenmesi, daha doğru analiz sonuçlarına ulaşmak için önemli bir adımdır.</p></li>
+<li><p><strong>Model Doğrulaması</strong>: Elde edilen modelin başka veri setleri ile test edilerek doğrulanması gerekmektedir.</p></li>
+<li><p><strong>Diğer Modellerin Kullanımı</strong>: Karar ağacı gibi farklı tahmin yöntemleri de kullanılarak model performansları karşılaştırılabilir.</p></li>
+<li><p><strong>Kalıtsallık İncelemesi</strong>: Kalp hastalıklarının kalıtsal olup olmadığının daha detaylı incelenmesi için genetik veri setleri de kullanılabilir.</p></li>
+</ul>
+<p>Bu çalışma, kalp hastalığı riskini belirli özelliklere göre tahmin edebilme potansiyelini ortaya koymakta ve toplumda yaygın olan bazı inançları veri analizi ile irdelemektedir. Analiz ve modelleme sonuçları, kalp hastalığı riskinin tahmin edilmesi ve önlenmesi açısından önemli bilgiler sunmaktadır.</p>
 
 
+</section>
 </section>
 
 <a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Back to top</a></main> <!-- /main -->

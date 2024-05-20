@@ -102,6 +102,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet">
 
 
 <link rel="stylesheet" href="styles.css">
@@ -157,7 +159,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#kalp-hastalıkları-tahminleme-projejimizi-tanıyalım" id="toc-kalp-hastalıkları-tahminleme-projejimizi-tanıyalım" class="nav-link active" data-scroll-target="#kalp-hastalıkları-tahminleme-projejimizi-tanıyalım"><span class="header-section-number">1</span> Kalp Hastalıkları Tahminleme Projejimizi Tanıyalım</a></li>
+  <li><a href="#kalp-hastalıkları-tahminleme-projemizi-tanıyalım" id="toc-kalp-hastalıkları-tahminleme-projemizi-tanıyalım" class="nav-link active" data-scroll-target="#kalp-hastalıkları-tahminleme-projemizi-tanıyalım"><span class="header-section-number">1</span> Kalp Hastalıkları Tahminleme Projemizi Tanıyalım</a></li>
   <li><a href="#veri" id="toc-veri" class="nav-link" data-scroll-target="#veri"><span class="header-section-number">2</span> Veri</a>
   <ul class="collapse">
   <li><a href="#veri-kaynağı" id="toc-veri-kaynağı" class="nav-link" data-scroll-target="#veri-kaynağı"><span class="header-section-number">2.1</span> Veri Kaynağı</a></li>
@@ -203,8 +205,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <p><strong>Proje sayfamıza hoş geldiniz, keyifli seyirler dileriz.</strong> 🫀</p>
 <p><img src="images/13up-healthlife-superJumbo-v2.gif" class="img-fluid" width="616"></p>
-<section id="kalp-hastalıkları-tahminleme-projejimizi-tanıyalım" class="level1" data-number="1">
-<h1 data-number="1"><span class="header-section-number">1</span> Kalp Hastalıkları Tahminleme Projejimizi Tanıyalım</h1>
+<section id="kalp-hastalıkları-tahminleme-projemizi-tanıyalım" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Kalp Hastalıkları Tahminleme Projemizi Tanıyalım</h1>
 </section>
 <section id="veri" class="level1" data-number="2">
 <h1 data-number="2"><span class="header-section-number">2</span> Veri</h1>
@@ -217,6 +219,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="veri-hakkında-genel-bilgiler" class="level2" data-number="2.2">
 <h2 data-number="2.2" class="anchored" data-anchor-id="veri-hakkında-genel-bilgiler"><span class="header-section-number">2.2</span> Veri Hakkında Genel Bilgiler</h2>
 <p>Bu veri setini halihazırda bağımsız olarak mevcut olan ancak daha önce birleştirilmemiş farklı veri setlerinin birleştirilmesiyle oluşturduk. Veri setimizde 5 kalp veri setini 11 ortak özellik üzerinden birleştirdik. Toplam gözlem sayımız tekrarlanan satırlar çıkarıldığında 918 gözlemdir.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>R Talimatları</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(kableExtra)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lattice)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(caret)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(e1071)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(forecast)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(pander)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"heart1.xlsx"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 12
+    Yas Cinsiyet Agri_Tipi Dinlenme_Kan_Basinci mm…¹ Kolestorel Aclik_Kan_Sekeri
+  &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;                         &lt;dbl&gt;      &lt;dbl&gt;            &lt;dbl&gt;
+1    40 Erkek    ATA                             140        289                0
+2    49 Kadin    NAP                             160        180                0
+3    37 Erkek    ATA                             130        283                0
+4    48 Kadin    ASY                             138        214                0
+5    54 Erkek    NAP                             150        195                0
+6    39 Erkek    NAP                             120        339                0
+# ℹ abbreviated name: ¹​`Dinlenme_Kan_Basinci mm/HG`
+# ℹ 6 more variables: Dinlenme_EKG &lt;chr&gt;, Maks_Kalp_Atis &lt;dbl&gt;,
+#   Egzersiz_Angina &lt;chr&gt;, Oldpeak &lt;dbl&gt;, ST_Egimi &lt;chr&gt;, Kalp_Hastaligi &lt;dbl&gt;</code></pre>
+</div>
+</div>
 <ol type="1">
 <li><p><strong>Yaş ve Cinsiyet</strong>:</p>
 <ul>
@@ -228,7 +262,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul></li>
 <li><p><strong>Dinlenme Kan Basıncı</strong>:</p>
 <ul>
-<li>Hastaların herhangi bir egzersiz yapmadığı sıradakş kan basınçlarını mm/HG cinsinden göstermektedir.</li>
+<li>Hastaların herhangi bir egzersiz yapmadığı sıradaki kan basınçlarını mm/HG cinsinden göstermektedir.</li>
 </ul></li>
 <li><p><strong>Kolesterol Seviyeleri</strong>:</p>
 <ul>
@@ -271,46 +305,368 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="analiz" class="level1" data-number="3">
 <h1 data-number="3"><span class="header-section-number">3</span> Analiz</h1>
+<p>Data analizine str fonksiyonu ile başlıyoruz.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>R Talimatları</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"heart1.xlsx"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>age_heart_disease <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Yas, Kalp_Hastaligi) <span class="sc">%&gt;%</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(Kalp_Hastaligi, count, <span class="at">fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total =</span> <span class="st">`</span><span class="at">0</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">1</span><span class="st">`</span>,</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">percent =</span> <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="sc">/</span> total <span class="sc">*</span> <span class="dv">100</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Grafiği oluşturma</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(age_heart_disease, <span class="fu">aes</span>(<span class="at">x =</span> Yas, <span class="at">y =</span> percent)) <span class="sc">+</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Yaşlara Göre Kalp Hastalığı Olma Durumu"</span>,</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Yaş"</span>,</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Kalp Hastalığı Olma Oranı (%)"</span>) <span class="sc">+</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"heart1.xlsx"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [918 × 12] (S3: tbl_df/tbl/data.frame)
+ $ Yas                       : num [1:918] 40 49 37 48 54 39 45 54 37 48 ...
+ $ Cinsiyet                  : chr [1:918] "Erkek" "Kadin" "Erkek" "Kadin" ...
+ $ Agri_Tipi                 : chr [1:918] "ATA" "NAP" "ATA" "ASY" ...
+ $ Dinlenme_Kan_Basinci mm/HG: num [1:918] 140 160 130 138 150 120 130 110 140 120 ...
+ $ Kolestorel                : num [1:918] 289 180 283 214 195 339 237 208 207 284 ...
+ $ Aclik_Kan_Sekeri          : num [1:918] 0 0 0 0 0 0 0 0 0 0 ...
+ $ Dinlenme_EKG              : chr [1:918] "Normal" "Normal" "ST" "Normal" ...
+ $ Maks_Kalp_Atis            : num [1:918] 172 156 98 108 122 170 170 142 130 120 ...
+ $ Egzersiz_Angina           : chr [1:918] "Hayir" "Hayir" "Hayir" "Evet" ...
+ $ Oldpeak                   : num [1:918] 0 1 0 1.5 0 0 0 0 1.5 0 ...
+ $ ST_Egimi                  : chr [1:918] "Up" "Flat" "Up" "Flat" ...
+ $ Kalp_Hastaligi            : num [1:918] 0 1 0 1 0 0 0 0 1 0 ...</code></pre>
+</div>
+</div>
+<p>Verinin istatiksel özeti:</p>
+<p>NA veri var mı?</p>
+<div class="cell">
+<details class="code-fold">
+<summary>R Talimatları</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>df_total <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"heart1.xlsx"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sum</span>(<span class="fu">is.na</span>(df_total))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0</code></pre>
+</div>
+<details class="code-fold">
+<summary>R Talimatları</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Veri seti özetini pander kullanarak gösterme</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>df_summary <span class="ot">&lt;-</span> df_total <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">Yas_mean =</span> <span class="fu">mean</span>(Yas, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">Yas_sd =</span> <span class="fu">sd</span>(Yas, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">Dinlenme_Kan_Basinci_mean =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">Dinlenme_Kan_Basinci mm/HG</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">Dinlenme_Kan_Basinci_sd =</span> <span class="fu">sd</span>(<span class="st">`</span><span class="at">Dinlenme_Kan_Basinci mm/HG</span><span class="st">`</span>, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">Kolestorel_mean =</span> <span class="fu">mean</span>(Kolestorel, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">Kolestorel_sd =</span> <span class="fu">sd</span>(Kolestorel, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">Aclik_Kan_Sekeri_mean =</span> <span class="fu">mean</span>(Aclik_Kan_Sekeri, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">Aclik_Kan_Sekeri_sd =</span> <span class="fu">sd</span>(Aclik_Kan_Sekeri, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">Maks_Kalp_Atis_mean =</span> <span class="fu">mean</span>(Maks_Kalp_Atis, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">Maks_Kalp_Atis_sd =</span> <span class="fu">sd</span>(Maks_Kalp_Atis, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">Oldpeak_mean =</span> <span class="fu">mean</span>(Oldpeak, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">Oldpeak_sd =</span> <span class="fu">sd</span>(Oldpeak, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gather</span>(<span class="at">key =</span> <span class="st">"Metric"</span>, <span class="at">value =</span> <span class="st">"Value"</span>)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Daha güzel bir tablo olarak gösterme</span></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>df_summary <span class="sc">%&gt;%</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="st">"html"</span>, <span class="at">caption =</span> <span class="st">"Veri Seti Özet İstatistikleri"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable_styling</span>(<span class="st">"striped"</span>, <span class="at">full_width =</span> F)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<table class="table table-striped table-sm small" data-quarto-postprocess="true">
+<caption>Veri Seti Özet İstatistikleri</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Metric</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Yas_mean</td>
+<td style="text-align: right;">53.5108932</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Yas_sd</td>
+<td style="text-align: right;">9.4326165</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Dinlenme_Kan_Basinci_mean</td>
+<td style="text-align: right;">132.3965142</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Dinlenme_Kan_Basinci_sd</td>
+<td style="text-align: right;">18.5141541</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Kolestorel_mean</td>
+<td style="text-align: right;">198.7995643</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Kolestorel_sd</td>
+<td style="text-align: right;">109.3841446</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Aclik_Kan_Sekeri_mean</td>
+<td style="text-align: right;">0.2331155</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Aclik_Kan_Sekeri_sd</td>
+<td style="text-align: right;">0.4230456</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Maks_Kalp_Atis_mean</td>
+<td style="text-align: right;">136.8093682</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Maks_Kalp_Atis_sd</td>
+<td style="text-align: right;">25.4603341</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Oldpeak_mean</td>
+<td style="text-align: right;">0.8873638</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Oldpeak_sd</td>
+<td style="text-align: right;">1.0665702</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</div>
+<p>Bu özet istatistikler, veri setinin genel sağlığını ve popülasyonun sağlık profillerini anlamak için kritik bilgiler sağlar. Daha detaylı analizler ve grafikler, bu özet istatistiklerin altında yatan ilişkileri ve trendleri ortaya çıkarmaya yardımcı olabilir.</p>
+<section id="keşifsel-veri-analizi" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="keşifsel-veri-analizi"><span class="header-section-number">3.1</span> Keşifsel Veri Analizi</h2>
+<p>Veri setindeki cinsiyet dağılımı:</p>
+<p>Erkekler, tüm yaş aralıklarında kadınlardan daha fazla sayıya sahip olduğu net olarak görülmektedir.<br>
+Her iki cinsiyet de 50-55 yaş aralığında zirve yapmaktadır. 30-45 yaş aralığında ve 65-75 yaş aralığında erkeklerin sayısı belirgin şekilde daha fazla görülmektedir.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>R Talimatları</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_total <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"heart1.xlsx"</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>erkek_sayisi <span class="ot">&lt;-</span> <span class="fu">sum</span>(df_total<span class="sc">$</span>Cinsiyet <span class="sc">==</span> <span class="st">"Erkek"</span>)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>kadin_sayisi <span class="ot">&lt;-</span> <span class="fu">sum</span>(df_total<span class="sc">$</span>Cinsiyet <span class="sc">==</span> <span class="st">"Kadin"</span>)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Erkek sayısı:"</span>, erkek_sayisi, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Erkek sayısı: 725 </code></pre>
+</div>
+<details class="code-fold">
+<summary>R Talimatları</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Kadın sayısı:"</span>, kadin_sayisi, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Kadın sayısı: 193 </code></pre>
+</div>
+<details class="code-fold">
+<summary>R Talimatları</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">barplot</span>(<span class="fu">table</span>(df_total<span class="sc">$</span>Cinsiyet), <span class="at">main =</span> <span class="st">"Cinsiyet Dağılımı"</span>, <span class="at">xlab =</span> <span class="st">"Cinsiyet"</span>, <span class="at">ylab =</span> <span class="st">"Kişi Sayısı"</span>, <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"pink"</span>), <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Erkek"</span>, <span class="st">"Kadın"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="proje_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="proje_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<details class="code-fold">
+<summary>R Talimatları</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_total, <span class="fu">aes</span>(<span class="at">x =</span> Yas, <span class="at">fill =</span> Cinsiyet)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">position =</span> <span class="st">"identity"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>, <span class="at">bins =</span> <span class="dv">10</span>) <span class="sc">+</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Yaş"</span>, <span class="at">y =</span> <span class="st">"Frekans"</span>, <span class="at">title =</span> <span class="st">"Erkek ve Kadınların Yaş Dağılımları"</span>) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()<span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">30</span>, <span class="dv">70</span>, <span class="at">by =</span> <span class="dv">5</span>))<span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">200</span>, <span class="at">by =</span> <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="proje_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
 </div>
-<section id="keşifsel-veri-analizi" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="keşifsel-veri-analizi"><span class="header-section-number">3.1</span> Keşifsel Veri Analizi</h2>
-<p>xxxxxx</p>
+<p>Bu veri dünya genelinde kalp hastalığı rahatsızlığı ile hastaneye başvuranların, büyük kısmının erkek olması sebebiyle erkekler kalp rahatsızlığına daha yatkın olabilir mi? sorusu ortaya atmaktadır.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>R Talimatları</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"heart1.xlsx"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>df_summary <span class="ot">&lt;-</span> df_total <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Cinsiyet, Kalp_Hastaligi) <span class="sc">%&gt;%</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Cinsiyet) <span class="sc">%&gt;%</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total =</span> <span class="fu">sum</span>(count), <span class="at">proportion =</span> count <span class="sc">/</span> total <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(Kalp_Hastaligi <span class="sc">==</span> <span class="dv">1</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_summary, <span class="fu">aes</span>(<span class="at">x =</span> Cinsiyet, <span class="at">y =</span> proportion, <span class="at">fill =</span> Cinsiyet)) <span class="sc">+</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>, <span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Erkek"</span> <span class="ot">=</span> <span class="st">"#9999FF"</span>, <span class="st">"Kadin"</span> <span class="ot">=</span> <span class="st">"#FF9999"</span>)) <span class="sc">+</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Cinsiyet &amp; Kalp Hastalığına Yakalanma Oranı(%)"</span>, <span class="at">x =</span> <span class="st">"Cinsiyet"</span>, <span class="at">y =</span> <span class="st">"Kalp Hastalığına Yakalanma Oranı(%)"</span>) <span class="sc">+</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">15</span>)<span class="sc">+</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>   <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">14</span>),</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>),</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">12</span>)</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(<span class="fu">round</span>(proportion, <span class="dv">1</span>), <span class="st">"%"</span>)), <span class="at">vjust =</span> <span class="sc">-</span><span class="fl">0.5</span>, <span class="at">size =</span> <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="proje_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<details class="code-fold">
+<summary>R Talimatları</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>df_total <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"heart1.xlsx"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">2</span>) <span class="sc">+</span> <span class="fl">0.1</span>)  </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>df_filtered <span class="ot">&lt;-</span> df_total[df_total<span class="sc">$</span>Kolestorel <span class="sc">&gt;</span> <span class="dv">0</span>,]<span class="co"># Kolesterol değeri sıfır olanları filtrele</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(df_filtered<span class="sc">$</span><span class="st">`</span><span class="at">Dinlenme_Kan_Basinci mm/HG</span><span class="st">`</span>, df_filtered<span class="sc">$</span>Kolestorel, </span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>     <span class="at">xlab =</span> <span class="st">"Dinlenme Kan Basıncı (mm/HG)"</span>, </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>     <span class="at">ylab =</span> <span class="st">"Kolesterol"</span>, </span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>     <span class="at">main =</span> <span class="st">"Kan Basıncı ve Kolesterol İlişkisi"</span>, </span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>     <span class="at">col =</span> <span class="fu">ifelse</span>(df_total<span class="sc">$</span>Kalp_Hastaligi <span class="sc">==</span> <span class="dv">1</span>, <span class="st">"red"</span>, <span class="st">"blue"</span>),</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>     <span class="at">pch =</span> <span class="dv">19</span>,  <span class="co"># Noktaların şelki</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>     <span class="at">cex =</span> <span class="fl">0.5</span>, <span class="co"># Nokta boyutu</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>     <span class="at">lwd =</span> <span class="dv">2</span>,<span class="co"># Nokta çizgi kalınlığı</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>     <span class="at">alpha =</span> <span class="fl">0.5</span>)  <span class="co"># Nokta saydamlgııı </span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, </span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>       <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">"Kalp Hastalığı Yok"</span>, <span class="st">"Kalp Hastalığı Var"</span>), </span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>       <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"blue"</span>, <span class="st">"red"</span>), </span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>       <span class="at">pch =</span> <span class="dv">19</span>, </span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>       <span class="at">pt.cex =</span> <span class="fl">1.1</span>, <span class="co"># Nokta boyutu</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>       <span class="at">cex =</span> <span class="fl">0.5</span>,    <span class="co"># Metin boyutu</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">"Kalp Hastalığı"</span>, </span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>       <span class="at">bg =</span> <span class="st">"yellow"</span>,  <span class="co"># Arkaplan renk</span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>       <span class="at">box.lwd =</span> <span class="fl">1.5</span>) <span class="co"># Kutu çizgi kalınlıgıı</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="proje_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Görüldüğü üzere, genel eğilim, dinlenme kan basıncının yüksek olduğu durumlarda kolesterol seviyelerinin arttığı yönündedir. Ayrıca, kalp hastalığı olan bireylerin genellikle daha yüksek kolesterol seviyelerine sahip olduğu gözlemlenmektedir.Ancak, bu ilişkinin kesin olmadığını belirtmek gerekir, çünkü bazı düşük dinlenme kan basıncı değerlerine sahip bireylerin yine de yüksek kolesterol seviyelerine sahip olduğu noktalar görülebilmektedir.</p>
+<p>Bunların yanında bu grafikte Dinlenme Kan Basıncı 120- 140 - 160 mm/HG değerlerinde bir patern görülmektedir. Bu paterinin ölçümleri yuvarlayan doktorlar veya hemşirelerden kaynaklandığı düşünülmektedir.</p>
+<p>Kolesterol değerleri 400’ün üzerine çıktığında kalp hastalığı olan bireylerin sayısında artış gözlemleniyor.</p>
+<p>Kırmızı ve mavi noktalar arasında belirgin bir ayrım yok gibi görünüyor; bu, dinlenme kan basıncı ve kolesterol değerlerinin tek başına kalp hastalığını öngörmede yeterli olmadığını gösterebilir.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>R Talimatları</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"heart1.xlsx"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="at">oma =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">0</span>), <span class="at">mar =</span> <span class="fu">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">1</span>), <span class="at">cex.lab =</span> <span class="fl">0.8</span>, <span class="at">cex.main =</span> <span class="dv">1</span>, <span class="at">cex.axis =</span> <span class="fl">0.8</span>)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>df_filtered <span class="ot">&lt;-</span> df_total[df_total<span class="sc">$</span>Kolestorel <span class="sc">&gt;</span> <span class="dv">0</span>,]</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(df_filtered<span class="sc">$</span>Kolestorel <span class="sc">~</span> df_filtered<span class="sc">$</span>Kalp_Hastaligi, <span class="co"># Kolesterol ve Kalp Hastalığı</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Kolesterol - Hastalık"</span>, </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Hastalık"</span>, </span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Kolesterol"</span>, </span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"turquoise"</span>, <span class="st">"coral"</span>), </span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"Hayır"</span>, <span class="st">"Evet"</span>))</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(data<span class="sc">$</span><span class="st">`</span><span class="at">Dinlenme_Kan_Basinci mm/HG</span><span class="st">`</span> <span class="sc">~</span> data<span class="sc">$</span>Kalp_Hastaligi, <span class="co"># Dinlenme Kan Basıncı ve Kalp Hastalığı</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Dinlenme Kan Basıncı - Hastalık"</span>, </span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Hastalık"</span>, </span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Dinlenme Kan Basıncı (mm/HG)"</span>, </span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"turquoise"</span>, <span class="st">"coral"</span>), </span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>        <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"Hayır"</span>, <span class="st">"Evet"</span>))</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(data<span class="sc">$</span>Maks_Kalp_Atis <span class="sc">~</span> data<span class="sc">$</span>Kalp_Hastaligi, <span class="co"># Maksimum Kalp Atışı ve Kalp Hastalığı</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Maksimum Kalp Atışı-Hastalık"</span>, </span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"Hastalık"</span>, </span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Maksimum Kalp Atışı"</span>, </span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"turquoise"</span>, <span class="st">"coral"</span>), </span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>        <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"Hayır"</span>, <span class="st">"Evet"</span>))</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="fu">boxplot</span>(data<span class="sc">$</span>Yas <span class="sc">~</span> data<span class="sc">$</span>Kalp_Hastaligi, <span class="co"># Yaş ve Kalp Hastalığı</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">"Yaş - Hastalık"</span>, </span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>        <span class="at">xlab =</span> <span class="st">"HHastalık"</span>, </span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">"Yaş"</span>, </span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>        <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"turquoise"</span>, <span class="st">"coral"</span>), </span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>        <span class="at">names =</span> <span class="fu">c</span>(<span class="st">"Hayır"</span>, <span class="st">"Evet"</span>))</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span>(<span class="st">"Boxplots Niteliklerin Hastalığa Etkisi"</span>, <span class="at">outer =</span> <span class="cn">TRUE</span>, <span class="at">cex.main =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="proje_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Kalp hastalığı olmayan bireylerde maksimum kalp atışı genellikle daha yüksek (medyan yaklaşık 160)</p>
+<p>Kalp hastalığı olmayan bireylerin yaş aralığı genellikle daha düşük ve daha dar bir aralıkta yoğunlaşmış (medyan yaklaşık 45).<br>
+Kalp hastalığı olan bireylerde yaş daha geniş bir aralıkta dağılmış ve daha yüksek (medyan yaklaşık 55).<br>
+Bu da yaşın, kalp hastalığı için önemli bir risk faktörü olduğunu göstermektedir.</p>
+<p>Veriler, kalp hastalığı olan bireylerin genellikle daha yüksek kolesterol ve dinlenme kan basıncına sahip olduğunu, ancak maksimum kalp atışlarının ve yaşlarının daha yüksek olduğunu göstermektedir.</p>
+<div class="cell">
+<details class="code-fold">
+<summary>R Talimatları</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>df_total<span class="sc">$</span>Kalp_Hastaligi <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df_total<span class="sc">$</span>Kalp_Hastaligi)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>df_total<span class="sc">$</span>Agri_Tipi <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(df_total<span class="sc">$</span>Agri_Tipi)</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df_total, <span class="fu">aes</span>(<span class="at">x =</span> Agri_Tipi, <span class="at">fill =</span> Kalp_Hastaligi)) <span class="sc">+</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> scales<span class="sc">::</span>percent) <span class="sc">+</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Agri Tipi ve Kalp Hastaligi Orani"</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Agri Tipi"</span>,</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Oran"</span>,</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Kalp Hastaligi"</span>) <span class="sc">+</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="proje_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Bu grafik, hangi ağrı tiplerinin kalp hastalığı ile daha çok ilişkilendirildiğini görselleştirerek analiz etmeye yardımcı olur. Örneğin, TA (Asimptomatik) ağrı tipi olan bireylerin arasında kalp hastalığına sahip olanların oranının diğer ağrı tiplerine göre daha yüksek olduğu gözlemlenmektedir.</p>
 </section>
 <section id="trend-analizi" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="trend-analizi"><span class="header-section-number">3.2</span> Trend Analizi</h2>
-<p>xxxxxx</p>
+<p>İlgili veri setinde dikkatimizi çeken ve gözlem verileriyle ispatlamak istediğimiz YAŞ ve KALP HASTALIĞI arasindaki trend oldu</p>
+<div class="cell">
+<details class="code-fold">
+<summary>R Talimatları</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"heart1.xlsx"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>age_heart_disease <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Yas, Kalp_Hastaligi) <span class="sc">%&gt;%</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">count =</span> <span class="fu">n</span>()) <span class="sc">%&gt;%</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">spread</span>(Kalp_Hastaligi, count, <span class="at">fill =</span> <span class="dv">0</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">total =</span> <span class="st">`</span><span class="at">0</span><span class="st">`</span> <span class="sc">+</span> <span class="st">`</span><span class="at">1</span><span class="st">`</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>         <span class="at">percent =</span> <span class="st">`</span><span class="at">1</span><span class="st">`</span> <span class="sc">/</span> total <span class="sc">*</span> <span class="dv">100</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(age_heart_disease, <span class="fu">aes</span>(<span class="at">x =</span> Yas, <span class="at">y =</span> percent)) <span class="sc">+</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_area</span>(<span class="at">fill =</span> <span class="st">"lightblue"</span>, <span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">"blue"</span>) <span class="sc">+</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Yaşlara Göre Kalp Hastalığı Olma Durumu"</span>,</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Yaş"</span>,</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">"Kalp Hastalığı Olma Oranı (%)"</span>) <span class="sc">+</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="proje_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Görüldüğü üzere, kalp hastalığının yaşla birlikte arttığını açıkça göstermektedir. Genç yaşlarda oran daha düşükken, yaşlandıkça kalp hastalığına sahip olma oranı önemli ölçüde yükselmektedir.</p>
 </section>
 <section id="model-uydurma" class="level2" data-number="3.3">
 <h2 data-number="3.3" class="anchored" data-anchor-id="model-uydurma"><span class="header-section-number">3.3</span> Model Uydurma</h2>

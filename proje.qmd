@@ -321,7 +321,7 @@ age_heart_disease <- data %>%
 ggplot(age_heart_disease, aes(x = Yas, y = percent)) +
   geom_area(fill = "lightblue", alpha = 0.5) +
   geom_line(color = "blue") +
-  labs(title = "Yaşlara Göre Kalp Hastalığı Olma Durumu",
+  labs(title = "Yaşlara Göre Kalp Hastalığı Olma Yüzdesi",
        x = "Yaş",
        y = "Kalp Hastalığı Olma Oranı (%)") +
   theme_minimal()

@@ -17,7 +17,7 @@ Resmi kurumlardan alınmış Cleveland (330 gözlem), Macaristan (294 gözlem), 
 
 Kullandığımız veri setleri UCI Makine Öğrenimi Havuzundaki kalp hastalığı veri setleri dizini altında bulunabilir.
 
-Link: <https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/>
+Link: <https://archive.ics.uci.edu/dataset/45/heart+disease>
 
 ## Veri Hakkında Genel Bilgiler
 

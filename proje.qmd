@@ -454,6 +454,8 @@ print(performance_table, row.names = TRUE)
 
 ```
 
+-   Gini hatalar algoritması ile düşük gini değerleri çıkan nitelikten başlayarak ve gini algoritması kullanılarak karar ağacı oluşturuldu, bu karar ağacının test verisinde değerlendirilmesi sonucu %82 oranında doğru tahmin yaptırğı görüldü.
+
 ## Sonuçlar
 
 Sonuç olarak veri setindeki değişkenlerin birbirleriyle olan ilişkilerine anlamlı grafikler çizdirerek baktık, incelenen grafiklerden net sonuçlar yaşın, egzersiz anginanın, Agri tipinin ve ST eğiminin kalp hastalığı üzerinde diğer etkilerden daha ağırlıklı olduğunu gördük. Bunun yanında cinsiyet farkınında hastalığa etkisi önemli bir soru ortaya çıkardı, veri setinde cinsiyetlerin sayılarının eşitlenmesinden sonra tekrar analizler yapılarak daha doğru sonuçlara ulaşılabilir. Elde edilen Regresyon modeli %91 oranında doğru sonuçlar ortaya çıkarmaktadır. Ama tabiki bu sonuç test verimizde denendiği için başka test verilerinde de denenerek test edilmelidir. Bunların yanında karar ağacı modeli ile bir tahmin methodu geliştirdik bu method ile istenilen verileri girmeniz durumunda kalp hastası olup olmadığınız konusunda bir tahmin cevabı alabilirsiniz.
@@ -487,6 +489,8 @@ Bu çalışmada, beş farklı kalp veri setini birleştirerek oluşturulan ve to
 -   **Karmaşıklık Matrisi Sonuçları**: Modelin doğru negatif, yanlış negatif, yanlış pozitif ve doğru pozitif sayıları hesaplandı. Modelin doğruluğu %91 olarak belirlendi.
 
 -   **Tahmin Doğruluğu**: Modelin tahmin doğruluğu çeşitli performans metrikleri kullanılarak değerlendirildi ve iyi bir performans sergilediği görüldü.
+
+-   **Karar Ağacı Metodu :** Gini hatalar algoritması ile düşük gini değerleri çıkan nitelikten başlayarak ve gini algoritması kullanılarak karar ağacı oluşturuldu, bu karar ağacının test verisinde değerlendirilmesi sonucu %82 oranında doğru tahmin yaptırğı görüldü.
 
 #### **Ana Çıkarımlar**
 

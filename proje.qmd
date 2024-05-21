@@ -81,7 +81,7 @@ head(data)
 
 10. **ST Eğimi**:
 
-    -   ST eğimi, Up (Yukarı), Flat (Düz) ve Down (Aşağı) olarak kategorize edilmiş.
+    -   ST eğimi, Up (Yukarı), Flat (Düz) ve Down (Aşağı) olarak kategorize edilmiş. **S dalgası sonu (J noktası) ile T dalgası arasındaki yassı, izoelektrik EKG kısmıdır.**
 
 11. **Kalp Hastalığı**:
 

@@ -499,14 +499,14 @@ Bu çalışmada, beş farklı veri setini birleştirerek oluşturulan ve toplam 
 
 #### **Öneriler ve Gelecek Çalışmalar**
 
--   **Cinsiyet Dağılımı**: Veri setindeki cinsiyet dağılımının dengelenmesi, daha doğru analiz sonuçlarına ulaşmak için önemli bir adımdır.
+-   **Cinsiyet Dağılımı**: Veri setindeki cinsiyet dağılımının dengelenmesi, daha doğru analiz sonuçlarına ulaşmamızı sağlar.
 
--   **Model Doğrulaması**: Elde edilen modelin başka veri setleri ile test edilerek doğrulanması gerekmektedir.
+-   **Model Doğrulaması**: Elde edilen modelin başka veri setleri veya test verileri ile test edilerek doğrulanması gerekmektedir.
 
 -   **Diğer Modellerin Kullanımı**: Karar ağacı gibi farklı tahmin yöntemleri de kullanılarak model performansları karşılaştırılabilir.
 
--   **Kalıtsallık İncelemesi**: Kalp hastalıklarının kalıtsal olup olmadığının daha detaylı incelenmesi için genetik veri setleri de kullanılabilir.
+-   **Kalıtsallık İncelemesi**: Kalp hastalıklarının kalıtsal olup olmadığının daha detaylı incelenmesi için genetik veri setleri ile başka bir çalışma daha yapılabilir.
 
-Bu çalışma, kalp hastalığı riskini belirli özelliklere göre tahmin edebilme potansiyelini ortaya koymakta ve toplumda yaygın olan bazı inançları veri analizi ile irdelemektedir. Analiz ve modelleme sonuçları, kalp hastalığı riskinin tahmin edilmesi ve önlenmesi açısından önemli bilgiler ve model sunmaktadır.
+Bu çalışma, kalp hastalığı riskini belirli özelliklere göre tahmin edebilme potansiyelini ortaya koymakta ve kalp hastalığının tahminini veri analizi ile irdelemektedir. Yaptığımız proje, kalp hastalığı riskinin tahmin edilmesi ve önlenmesi açısından önemli bilgiler ve modeller sunmaktadır.
 
 ![](images/5ffba8a3-b485-4f04-8bc7-0f4d8d528315_text.gif)

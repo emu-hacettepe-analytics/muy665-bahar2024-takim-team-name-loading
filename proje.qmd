@@ -300,7 +300,7 @@ ggplot(data = df_total, aes(x = Agri_Tipi, fill = Kalp_Hastaligi)) +
   theme_minimal()
 ```
 
-Bu grafik, hangi ağrı tiplerinin kalp hastalığı ile daha çok ilişkilendirildiğini görselleştirerek analiz etmeye yardımcı olur. Örneğin, TA (Asimptomatik) ağrı tipi olan bireylerin arasında kalp hastalığına sahip olanların oranının diğer ağrı tiplerine göre daha yüksek olduğu gözlemlenmektedir.
+Bu grafik, hangi ağrı tiplerinin kalp hastalığı ile daha çok ilişkilendirildiğini görselleştirerek analiz etmeye yardımcı olur. Örneğin, ASY ağrı tipi olan bireylerin arasında kalp hastalığına sahip olanların oranının diğer ağrı tiplerine göre daha yüksek olduğu gözlemlenmektedir.
 
 ## Trend Analizi
 
@@ -329,7 +329,7 @@ ggplot(age_heart_disease, aes(x = Yas, y = percent)) +
   theme_minimal()
 ```
 
-Görüldüğü üzere, kalp hastalığının yaşla birlikte arttığını açıkça göstermektedir. Genç yaşlarda oran daha düşükken, yaşlandıkça kalp hastalığına sahip olma oranı önemli ölçüde yükselmektedir.
+Görüldüğü üzere, kalp hastalığının yaşla birlikte arttığını açıkça göstermektedir. Orta yaşlarda oran daha düşükken, yaşlandıkça kalp hastalığına sahip olma oranı önemli ölçüde yükselmektedir.
 
 ## Model Uydurma
 
@@ -461,7 +461,7 @@ Bu çalışmada, beş farklı veri setini birleştirerek oluşturulan ve toplam 
 
 -   **Yaş ve Cinsiyet**: Veri setinde erkeklerin sayısının kadınlara göre daha fazla olduğu görüldü. Özellikle 50-55 yaş aralığında her iki cinsiyet de zirve yapmaktadır.
 
--   **Ağrı Tipi**: Farklı göğüs ağrısı tiplerinin kalp hastalığı ile ilişkisi incelendi. TA (Asimptomatik) ağrı tipi olan bireylerin kalp hastalığına daha yatkın olduğu gözlemlendi.
+-   **Ağrı Tipi**: Farklı göğüs ağrısı tiplerinin kalp hastalığı ile ilişkisi incelendi. ASY ağrı tipi olan bireylerin kalp hastalığına daha yatkın olduğu gözlemlendi.
 
 -   **Dinlenme Kan Basıncı ve Kolesterol**: Yüksek dinlenme kan basıncı ve kolesterol seviyelerinin kalp hastalığı riskini artırdığı görüldü.
 

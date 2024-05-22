@@ -455,7 +455,7 @@ Sonuç olarak veri setindeki değişkenlerin birbirleriyle olan ilişkilerine an
 
 # Sonuçlar ve Ana Çıkarımlar
 
-Bu çalışmada, beş farklı kalp veri setini birleştirerek oluşturulan ve toplam 918 gözlem içeren bir veri seti üzerinde analizler yapıldı. Analizlerde, kalp hastalığının belirli özelliklere bağlı olarak tahmin edilip edilemeyeceği incelendi ve kalp hastalıklarının kalıtsal olup olmadığı gibi genel inançlar irdelendi.
+Bu çalışmada, beş farklı veri setini birleştirerek oluşturulan ve toplam 918 gözlem içeren bir veri seti üzerinde analizler yapıldı. Analizlerde, kalp hastalığının belirli özelliklere bağlı olarak tahmin edilip edilemeyeceği incelendi ve kalp hastalıklarının kalıtsal olup olmadığı gibi genel inançlar değerlendirildi.
 
 #### **Veri Keşfi ve Ön İşleme**
 
@@ -507,4 +507,6 @@ Bu çalışmada, beş farklı kalp veri setini birleştirerek oluşturulan ve to
 
 -   **Kalıtsallık İncelemesi**: Kalp hastalıklarının kalıtsal olup olmadığının daha detaylı incelenmesi için genetik veri setleri de kullanılabilir.
 
-Bu çalışma, kalp hastalığı riskini belirli özelliklere göre tahmin edebilme potansiyelini ortaya koymakta ve toplumda yaygın olan bazı inançları veri analizi ile irdelemektedir. Analiz ve modelleme sonuçları, kalp hastalığı riskinin tahmin edilmesi ve önlenmesi açısından önemli bilgiler sunmaktadır.
+Bu çalışma, kalp hastalığı riskini belirli özelliklere göre tahmin edebilme potansiyelini ortaya koymakta ve toplumda yaygın olan bazı inançları veri analizi ile irdelemektedir. Analiz ve modelleme sonuçları, kalp hastalığı riskinin tahmin edilmesi ve önlenmesi açısından önemli bilgiler ve model sunmaktadır.
+
+![](images/5ffba8a3-b485-4f04-8bc7-0f4d8d528315_text.gif)
